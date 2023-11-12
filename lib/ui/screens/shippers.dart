@@ -1,0 +1,928 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:gogo_admin/shared/mtext.dart';
+import 'package:gogo_admin/shared/mcolors.dart';
+
+class ShippersScreen extends StatefulWidget {
+  const ShippersScreen({super.key});
+
+  @override
+  State<ShippersScreen> createState() => _ShippersScreenState();
+}
+
+class _ShippersScreenState extends State<ShippersScreen> {
+  bool hideFunction = true;
+  final _formKey = GlobalKey<FormState>();
+  int choice = 1;
+
+  var fullName = TextEditingController();
+  var cccd = TextEditingController();
+  var phoneNumber = TextEditingController();
+  var email = TextEditingController();
+  var dayOfBirth = TextEditingController();
+  var mainAddress = TextEditingController();
+  var secondAddress = TextEditingController();
+  var password = TextEditingController();
+
+  String id = "";
+  String gender = "Nam";
+  String joinDay = "";
+  String profileImg =
+      "https://firebasestorage.googleapis.com/v0/b/gogoship-70cca.appspot.com/o/shipperProfileImages%2Fdfavt.png?alt=media&token=8805717a-9b9d-4b69-98bf-53b43f7f825d";
+  double totalReceivedToday = 0;
+  String postOffice = "BC Ninh Kiều";
+
+  final List<String> deliveringOrders = [];
+  final List<String> successfulDeliveryOrders = [];
+  final List<String> importOrders = [];
+  final List<String> takingOrders = [];
+  final List<String> reTakingOrders = [];
+  final List<String> redeliveryOrders = [];
+
+  @override
+  void initState() {
+    var t = DateTime.now();
+    setState(() {
+      joinDay = "${t.day}/${t.month}/${t.year}";
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    fullName.dispose();
+    cccd.dispose();
+    phoneNumber.dispose();
+    email.dispose();
+    dayOfBirth.dispose();
+    mainAddress.dispose();
+    secondAddress.dispose();
+    super.dispose();
+  }
+
+  Future<void> addShipperData(String shipperID) async {
+    await FirebaseFirestore.instance.collection('Shippers').doc(shipperID).set({
+      "id": shipperID,
+      "fullName": fullName.text,
+      "gender": gender,
+      "cccd": cccd.text,
+      "phoneNumber": phoneNumber.text,
+      "email": email.text.trim(),
+      "dayOfBirth": dayOfBirth.text,
+      "mainAddress": mainAddress.text,
+      "secondAddress": secondAddress.text,
+      "joinDay": joinDay,
+      "postOffice": postOffice,
+      "profileImg":
+          "https://firebasestorage.googleapis.com/v0/b/gogoship-70cca.appspot.com/o/shipperProfileImages%2Fdfavt.png?alt=media&token=8805717a-9b9d-4b69-98bf-53b43f7f825d",
+      "totalReceivedToday": totalReceivedToday,
+      "takingOrders": takingOrders,
+      "reTakingOrders": reTakingOrders,
+      "deliveringOrders": deliveringOrders,
+      "redeliveryOrders": redeliveryOrders,
+      "importOrders": importOrders,
+      "successfulDeliveryOrders": successfulDeliveryOrders,
+    });
+  }
+
+  void resetTextController() {
+    fullName.text = "";
+    cccd.text = "";
+    phoneNumber.text = "";
+    email.text = "";
+    dayOfBirth.text = "";
+    mainAddress.text = "";
+    secondAddress.text = "";
+    fullName.text = "";
+    gender = "Nam";
+    password.text = "";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        title: const Text(
+          "Quản lý nhân viên",
+          style: TextStyle(
+            fontSize: 17,
+          ),
+        ),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      hideFunction = !hideFunction;
+                    });
+                  },
+                  child: Text(hideFunction == false ? "Hủy" : "Thêm nhân viên"),
+                ),
+                const SizedBox(height: 20),
+                hideFunction == false
+                    ? SizedBox(
+                        height: 450,
+                        child: formAddShipper(),
+                      )
+                    : const SizedBox(),
+                const SizedBox(height: 20),
+                const Text(
+                  "DANH SÁCH NHÂN VIÊN",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: SizedBox(
+                    width: 1000,
+                    child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection("Shippers")
+                          .snapshots(),
+                      builder: (context, shipperSnap) {
+                        if (shipperSnap.hasData) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: shipperSnap.data!.docs.isNotEmpty
+                                ? shipperSnap.data!.docs.length
+                                : 0,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        width: 1,
+                                        color: MColors.blue,
+                                      ),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                          fit: BoxFit.cover,
+                                                          image: NetworkImage(
+                                                            shipperSnap.data!
+                                                                    .docs[index]
+                                                                ["profileImg"],
+                                                          ),
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                          15,
+                                                        ),
+                                                      ),
+                                                      height: 250,
+                                                      width: 250,
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: MText(
+                                                        title: "Họ tên:",
+                                                        content: shipperSnap
+                                                                .data!
+                                                                .docs[index]
+                                                            ["fullName"],
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: MText(
+                                                        title: "Giới tính:",
+                                                        content: shipperSnap
+                                                                .data!
+                                                                .docs[index]
+                                                            ["gender"],
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: MText(
+                                                        title: "Ngày sinh:",
+                                                        content: shipperSnap
+                                                                .data!
+                                                                .docs[index]
+                                                            ["dayOfBirth"],
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: MText(
+                                                        title: "CCCD:",
+                                                        content: shipperSnap
+                                                                .data!
+                                                                .docs[index]
+                                                            ["cccd"],
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: MText(
+                                                        title: "Điện thoại:",
+                                                        content: shipperSnap
+                                                                .data!
+                                                                .docs[index]
+                                                            ["phoneNumber"],
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: MText(
+                                                        title: "Email:",
+                                                        content: shipperSnap
+                                                                .data!
+                                                                .docs[index]
+                                                            ["email"],
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: MText(
+                                                        title: "Thường trú:",
+                                                        content: shipperSnap
+                                                                .data!
+                                                                .docs[index]
+                                                            ["mainAddress"],
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: MText(
+                                                        title: "Tạm trú:",
+                                                        content: shipperSnap
+                                                                .data!
+                                                                .docs[index]
+                                                            ["secondAddress"],
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: MText(
+                                                        title: "Bưu cục:",
+                                                        content: shipperSnap
+                                                                .data!
+                                                                .docs[index]
+                                                            ["postOffice"],
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: MText(
+                                                        title: "Ngày tham gia:",
+                                                        content: shipperSnap
+                                                                .data!
+                                                                .docs[index]
+                                                            ["joinDay"],
+                                                        size: 18,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  )
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          return const Center(child: Text("Error"));
+                        }
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget formAddShipper() {
+    return Center(
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 1,
+            color: MColors.darkBlue,
+          ),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        width: 1000,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 400,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Họ tên:",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            SizedBox(
+                              width: 300,
+                              child: TextFormField(
+                                controller: fullName,
+                                maxLength: 100,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: MColors.darkBlue),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.white),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  filled: true,
+                                  fillColor: MColors.background,
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Hãy nhập họ tên";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 400,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "CCCD:",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            SizedBox(
+                              width: 300,
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                controller: cccd,
+                                maxLength: 12,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: MColors.darkBlue),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.white),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  filled: true,
+                                  fillColor: MColors.background,
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Hãy nhập CCCD";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 400,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Ngày sinh:",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            SizedBox(
+                              width: 300,
+                              child: TextFormField(
+                                controller: dayOfBirth,
+                                maxLength: 10,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: MColors.darkBlue),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.white),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  filled: true,
+                                  fillColor: MColors.background,
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Hãy nhập ngày sinh";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 400,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Giới tính:",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            const SizedBox(width: 10),
+                            genderChoice("Nam", 1),
+                            genderChoice("Nữ", 2),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 400,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Điện thoại:",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            SizedBox(
+                              width: 300,
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                controller: phoneNumber,
+                                maxLength: 10,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: MColors.darkBlue),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.white),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  filled: true,
+                                  fillColor: MColors.background,
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Hãy nhập số điện thoại";
+                                  }
+                                  if (!value.startsWith("0")) {
+                                    return "Số điện thoại không hợp lệ";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 400,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Email:",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            const SizedBox(width: 10),
+                            SizedBox(
+                              width: 300,
+                              child: TextFormField(
+                                controller: email,
+                                maxLength: 80,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: MColors.darkBlue),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.white),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  filled: true,
+                                  fillColor: MColors.background,
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Hãy nhập email";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Thường trú:",
+                          style: TextStyle(fontSize: 17),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: TextFormField(
+                            controller: mainAddress,
+                            maxLength: 150,
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                            decoration: InputDecoration(
+                              counterText: "",
+                              border: InputBorder.none,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: MColors.darkBlue),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide:
+                                    const BorderSide(color: MColors.white),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide:
+                                    const BorderSide(color: MColors.error),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide:
+                                    const BorderSide(color: MColors.error),
+                              ),
+                              filled: true,
+                              fillColor: MColors.background,
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Hãy nhập địa chỉ thường trú";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Tạm trú:",
+                          style: TextStyle(fontSize: 17),
+                        ),
+                        const SizedBox(width: 35),
+                        Expanded(
+                          child: SizedBox(
+                            child: TextFormField(
+                              controller: secondAddress,
+                              maxLength: 150,
+                              style: const TextStyle(
+                                fontSize: 18,
+                              ),
+                              decoration: InputDecoration(
+                                counterText: "",
+                                border: InputBorder.none,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: MColors.darkBlue),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.white),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.error),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.error),
+                                ),
+                                filled: true,
+                                fillColor: MColors.background,
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Hãy nhập địa chỉ tạm trú";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  SizedBox(
+                    width: 450,
+                    child: Row(
+                      children: [
+                        const Text(
+                          "Mật khẩu:",
+                          style: TextStyle(fontSize: 17),
+                        ),
+                        const SizedBox(width: 25),
+                        SizedBox(
+                          width: 300,
+                          child: TextFormField(
+                            controller: password,
+                            maxLength: 10,
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                            decoration: InputDecoration(
+                              counterText: "",
+                              hintText: "8 - 10 ký tự",
+                              hintStyle: const TextStyle(
+                                fontSize: 17,
+                              ),
+                              border: InputBorder.none,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: MColors.darkBlue),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide:
+                                    const BorderSide(color: MColors.white),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide:
+                                    const BorderSide(color: MColors.error),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide:
+                                    const BorderSide(color: MColors.error),
+                              ),
+                              filled: true,
+                              fillColor: MColors.background,
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Hãy nhập mật khẩu mẫu";
+                              }
+                              if (value.length < 8) {
+                                return "Mật khẩu phải từ 8 ký tự";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(55)),
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        try {
+                          await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: email.text.trim(),
+                                  password: password.text.trim());
+                          await addShipperData(email.text.trim());
+                          resetTextController();
+                          setState(() {
+                            hideFunction = true;
+                          });
+                        } catch (e) {
+                          debugPrint(e.toString());
+                        }
+                      }
+                    },
+                    child: const Text("Thêm nhân viên"),
+                  ),
+                ],
+              )),
+        ),
+      ),
+    );
+  }
+
+  Widget genderChoice(String content, int choiceIndex) {
+    return SizedBox(
+      width: 150,
+      child: ListTile(
+        title: Text(
+          content,
+          style: const TextStyle(fontSize: 16),
+        ),
+        leading: Radio(
+          value: choiceIndex,
+          groupValue: choice,
+          activeColor: MColors.darkBlue,
+          onChanged: (value) {
+            setState(() {
+              choice = choiceIndex;
+              gender = content;
+            });
+          },
+        ),
+      ),
+    );
+  }
+}

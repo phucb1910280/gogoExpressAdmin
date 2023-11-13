@@ -14,7 +14,7 @@ class MColors extends Material {
   static const lightGreen = Color(0xff38ef7d);
   static const lightGreen2 = Color(0xff30c67c);
   static const green = Color(0xff099773);
-  static const yelow = Color(0xffFDC830);
+  static const yellow = Color(0xffFDC830);
   static const orange = Color(0xffF37335);
   static const lightOrange = Color(0xfffa9372);
   static const lightRed = Color.fromARGB(255, 192, 63, 106);

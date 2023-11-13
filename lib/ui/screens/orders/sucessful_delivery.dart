@@ -113,16 +113,16 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                                   const Expanded(
                                                       child: SizedBox()),
                                                   cText(
-                                                    "Ngày tạo:",
+                                                    "Trạng thái:",
                                                     orderSnap.data!.docs[index]
-                                                        ["orderDay"],
+                                                        ["status"],
                                                   ),
                                                   const Expanded(
                                                       child: SizedBox()),
                                                   cText(
-                                                    "Trạng thái:",
-                                                    orderSnap.data!.docs[index]
-                                                        ["status"],
+                                                    "Ngày giao:",
+                                                    orderSnap.data!.docs[index][
+                                                        "suscessfullDeliveryDay"],
                                                   ),
                                                 ],
                                               ),
@@ -518,6 +518,10 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                       //       FieldValue.arrayUnion(log),
                                       // });
                                     },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: MColors.background,
+                                      minimumSize: const Size.fromHeight(50),
+                                    ),
                                     child: const Text("Option"),
                                   ),
                                 ],

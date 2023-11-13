@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                   width: 195,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: MColors.darkBlue,
+                      color: MColors.darkBlue3,
                       width: 1,
                     ),
                     borderRadius: BorderRadius.circular(10),
@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         "BC Ninh Kiều",
                         style: TextStyle(
+                          color: MColors.darkBlue3,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -88,13 +89,21 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 20),
               ],
             ),
-            trailing: Padding(
-              padding: const EdgeInsets.only(top: 310),
-              child: Text(
-                "${FirebaseAuth.instance.currentUser!.email}",
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+            trailing: Expanded(
+              child: SizedBox(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "${FirebaseAuth.instance.currentUser!.email}",
+                      style: const TextStyle(
+                        color: MColors.darkBlue3,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
                 ),
               ),
             ),

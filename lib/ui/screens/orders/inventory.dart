@@ -112,16 +112,16 @@ class _InventoryState extends State<Inventory> {
                                                   const Expanded(
                                                       child: SizedBox()),
                                                   cText(
-                                                    "Ngày tạo:",
+                                                    "Trạng thái:",
                                                     orderSnap.data!.docs[index]
-                                                        ["orderDay"],
+                                                        ["status"],
                                                   ),
                                                   const Expanded(
                                                       child: SizedBox()),
                                                   cText(
-                                                    "Trạng thái:",
+                                                    "Ngày tạo:",
                                                     orderSnap.data!.docs[index]
-                                                        ["status"],
+                                                        ["orderDay"],
                                                   ),
                                                 ],
                                               ),
@@ -480,7 +480,7 @@ class _InventoryState extends State<Inventory> {
                                                           MColors.background,
                                                       minimumSize:
                                                           const Size.fromHeight(
-                                                        55,
+                                                        50,
                                                       ),
                                                     ),
                                                     onPressed: () async {

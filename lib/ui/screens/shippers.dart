@@ -137,7 +137,8 @@ class _ShippersScreenState extends State<ShippersScreen> {
                 const Text(
                   "DANH SÁCH NHÂN VIÊN",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -163,7 +164,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                     decoration: BoxDecoration(
                                       border: Border.all(
                                         width: 1,
-                                        color: MColors.blue,
+                                        color: MColors.darkBlue3,
                                       ),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
@@ -381,7 +382,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
         decoration: BoxDecoration(
           border: Border.all(
             width: 1,
-            color: MColors.darkBlue,
+            color: MColors.darkBlue3,
           ),
           borderRadius: BorderRadius.circular(20),
         ),
@@ -389,391 +390,32 @@ class _ShippersScreenState extends State<ShippersScreen> {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: 400,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Họ tên:",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            SizedBox(
-                              width: 300,
-                              child: TextFormField(
-                                controller: fullName,
-                                maxLength: 100,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                ),
-                                decoration: InputDecoration(
-                                  counterText: "",
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: MColors.darkBlue),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.white),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.error),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.error),
-                                  ),
-                                  filled: true,
-                                  fillColor: MColors.background,
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Hãy nhập họ tên";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 400,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "CCCD:",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            SizedBox(
-                              width: 300,
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                controller: cccd,
-                                maxLength: 12,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                ),
-                                decoration: InputDecoration(
-                                  counterText: "",
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: MColors.darkBlue),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.white),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.error),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.error),
-                                  ),
-                                  filled: true,
-                                  fillColor: MColors.background,
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Hãy nhập CCCD";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: 400,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Ngày sinh:",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            SizedBox(
-                              width: 300,
-                              child: TextFormField(
-                                controller: dayOfBirth,
-                                maxLength: 10,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                ),
-                                decoration: InputDecoration(
-                                  counterText: "",
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: MColors.darkBlue),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.white),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.error),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.error),
-                                  ),
-                                  filled: true,
-                                  fillColor: MColors.background,
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Hãy nhập ngày sinh";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 400,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Giới tính:",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            const SizedBox(width: 10),
-                            genderChoice("Nam", 1),
-                            genderChoice("Nữ", 2),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: 400,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Điện thoại:",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            SizedBox(
-                              width: 300,
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                controller: phoneNumber,
-                                maxLength: 10,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                ),
-                                decoration: InputDecoration(
-                                  counterText: "",
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: MColors.darkBlue),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.white),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.error),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.error),
-                                  ),
-                                  filled: true,
-                                  fillColor: MColors.background,
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Hãy nhập số điện thoại";
-                                  }
-                                  if (!value.startsWith("0")) {
-                                    return "Số điện thoại không hợp lệ";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 400,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Email:",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            const SizedBox(width: 10),
-                            SizedBox(
-                              width: 300,
-                              child: TextFormField(
-                                controller: email,
-                                maxLength: 80,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                ),
-                                decoration: InputDecoration(
-                                  counterText: "",
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color: MColors.darkBlue),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.white),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.error),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    borderSide:
-                                        const BorderSide(color: MColors.error),
-                                  ),
-                                  filled: true,
-                                  fillColor: MColors.background,
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Hãy nhập email";
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  SizedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Thường trú:",
-                          style: TextStyle(fontSize: 17),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: TextFormField(
-                            controller: mainAddress,
-                            maxLength: 150,
-                            style: const TextStyle(
-                              fontSize: 18,
-                            ),
-                            decoration: InputDecoration(
-                              counterText: "",
-                              border: InputBorder.none,
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: MColors.darkBlue),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide:
-                                    const BorderSide(color: MColors.white),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide:
-                                    const BorderSide(color: MColors.error),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide:
-                                    const BorderSide(color: MColors.error),
-                              ),
-                              filled: true,
-                              fillColor: MColors.background,
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Hãy nhập địa chỉ thường trú";
-                              }
-                              return null;
-                            },
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 400,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Họ tên:",
+                            style: TextStyle(fontSize: 17),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  SizedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Tạm trú:",
-                          style: TextStyle(fontSize: 17),
-                        ),
-                        const SizedBox(width: 35),
-                        Expanded(
-                          child: SizedBox(
+                          SizedBox(
+                            width: 300,
                             child: TextFormField(
-                              controller: secondAddress,
-                              maxLength: 150,
+                              controller: fullName,
+                              maxLength: 100,
                               style: const TextStyle(
                                 fontSize: 18,
                               ),
                               decoration: InputDecoration(
+                                hoverColor: MColors.lightBlue,
                                 counterText: "",
                                 border: InputBorder.none,
                                 focusedBorder: OutlineInputBorder(
@@ -797,44 +439,350 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                       const BorderSide(color: MColors.error),
                                 ),
                                 filled: true,
-                                fillColor: MColors.background,
+                                fillColor: Colors.blue[50],
                               ),
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return "Hãy nhập địa chỉ tạm trú";
+                                  return "Hãy nhập họ tên";
                                 }
                                 return null;
                               },
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 5),
-                  SizedBox(
-                    width: 450,
-                    child: Row(
-                      children: [
-                        const Text(
-                          "Mật khẩu:",
-                          style: TextStyle(fontSize: 17),
+                    SizedBox(
+                      width: 400,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "CCCD:",
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          SizedBox(
+                            width: 300,
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              controller: cccd,
+                              maxLength: 12,
+                              style: const TextStyle(
+                                fontSize: 18,
+                              ),
+                              decoration: InputDecoration(
+                                hoverColor: MColors.lightBlue,
+                                counterText: "",
+                                border: InputBorder.none,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: MColors.darkBlue),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.white),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.error),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.error),
+                                ),
+                                filled: true,
+                                fillColor: Colors.blue[50],
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Hãy nhập CCCD";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 400,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Ngày sinh:",
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          SizedBox(
+                            width: 300,
+                            child: TextFormField(
+                              controller: dayOfBirth,
+                              maxLength: 10,
+                              style: const TextStyle(
+                                fontSize: 18,
+                              ),
+                              decoration: InputDecoration(
+                                hoverColor: MColors.lightBlue,
+                                counterText: "",
+                                border: InputBorder.none,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: MColors.darkBlue),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.white),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.error),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.error),
+                                ),
+                                filled: true,
+                                fillColor: Colors.blue[50],
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Hãy nhập ngày sinh";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 400,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Giới tính:",
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          const SizedBox(width: 10),
+                          genderChoice("Nam", 1),
+                          genderChoice("Nữ", 2),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: 400,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Điện thoại:",
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          SizedBox(
+                            width: 300,
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              controller: phoneNumber,
+                              maxLength: 10,
+                              style: const TextStyle(
+                                fontSize: 18,
+                              ),
+                              decoration: InputDecoration(
+                                hoverColor: MColors.lightBlue,
+                                counterText: "",
+                                border: InputBorder.none,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: MColors.darkBlue),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.white),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.error),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.error),
+                                ),
+                                filled: true,
+                                fillColor: Colors.blue[50],
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Hãy nhập số điện thoại";
+                                }
+                                if (!value.startsWith("0")) {
+                                  return "Số điện thoại không hợp lệ";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 400,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Email:",
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          const SizedBox(width: 10),
+                          SizedBox(
+                            width: 300,
+                            child: TextFormField(
+                              controller: email,
+                              maxLength: 80,
+                              style: const TextStyle(
+                                fontSize: 18,
+                              ),
+                              decoration: InputDecoration(
+                                hoverColor: MColors.lightBlue,
+                                counterText: "",
+                                border: InputBorder.none,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: MColors.darkBlue),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.white),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.error),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide:
+                                      const BorderSide(color: MColors.error),
+                                ),
+                                filled: true,
+                                fillColor: Colors.blue[50],
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Hãy nhập email";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Thường trú:",
+                        style: TextStyle(fontSize: 17),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: TextFormField(
+                          controller: mainAddress,
+                          maxLength: 150,
+                          style: const TextStyle(
+                            fontSize: 18,
+                          ),
+                          decoration: InputDecoration(
+                            hoverColor: MColors.lightBlue,
+                            counterText: "",
+                            border: InputBorder.none,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(color: MColors.darkBlue),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide:
+                                  const BorderSide(color: MColors.white),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide:
+                                  const BorderSide(color: MColors.error),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide:
+                                  const BorderSide(color: MColors.error),
+                            ),
+                            filled: true,
+                            fillColor: Colors.blue[50],
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Hãy nhập địa chỉ thường trú";
+                            }
+                            return null;
+                          },
                         ),
-                        const SizedBox(width: 25),
-                        SizedBox(
-                          width: 300,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 5),
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Tạm trú:",
+                        style: TextStyle(fontSize: 17),
+                      ),
+                      const SizedBox(width: 35),
+                      Expanded(
+                        child: SizedBox(
                           child: TextFormField(
-                            controller: password,
-                            maxLength: 10,
+                            controller: secondAddress,
+                            maxLength: 150,
                             style: const TextStyle(
                               fontSize: 18,
                             ),
                             decoration: InputDecoration(
+                              hoverColor: MColors.lightBlue,
                               counterText: "",
-                              hintText: "8 - 10 ký tự",
-                              hintStyle: const TextStyle(
-                                fontSize: 17,
-                              ),
                               border: InputBorder.none,
                               focusedBorder: OutlineInputBorder(
                                 borderSide:
@@ -857,25 +805,98 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                     const BorderSide(color: MColors.error),
                               ),
                               filled: true,
-                              fillColor: MColors.background,
+                              fillColor: Colors.blue[50],
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Hãy nhập mật khẩu mẫu";
-                              }
-                              if (value.length < 8) {
-                                return "Mật khẩu phải từ 8 ký tự";
+                                return "Hãy nhập địa chỉ tạm trú";
                               }
                               return null;
                             },
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
+                ),
+                const SizedBox(height: 5),
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 450,
+                        child: Row(
+                          children: [
+                            const Text(
+                              "Mật khẩu:",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            const SizedBox(width: 25),
+                            SizedBox(
+                              width: 300,
+                              child: TextFormField(
+                                controller: password,
+                                maxLength: 10,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                                decoration: InputDecoration(
+                                  hoverColor: MColors.lightBlue,
+                                  counterText: "",
+                                  hintText: "8 - 10 ký tự",
+                                  hintStyle: const TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                  border: InputBorder.none,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: MColors.darkBlue),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.white),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide:
+                                        const BorderSide(color: MColors.error),
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.blue[50],
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Hãy nhập mật khẩu mẫu";
+                                  }
+                                  if (value.length < 8) {
+                                    return "Mật khẩu phải từ 8 ký tự";
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 1),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                SizedBox(
+                  width: 400,
+                  child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
+                        backgroundColor: MColors.darkBlue3,
+                        foregroundColor: MColors.white,
                         minimumSize: const Size.fromHeight(55)),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
@@ -896,8 +917,10 @@ class _ShippersScreenState extends State<ShippersScreen> {
                     },
                     child: const Text("Thêm nhân viên"),
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -914,7 +937,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
         leading: Radio(
           value: choiceIndex,
           groupValue: choice,
-          activeColor: MColors.darkBlue,
+          activeColor: MColors.darkBlue3,
           onChanged: (value) {
             setState(() {
               choice = choiceIndex;

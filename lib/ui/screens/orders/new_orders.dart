@@ -105,16 +105,16 @@ class _NewOrdersState extends State<NewOrders> {
                                                 const Expanded(
                                                     child: SizedBox()),
                                                 cText(
-                                                  "Ngày tạo:",
+                                                  "Trạng thái:",
                                                   orderSnap.data!.docs[index]
-                                                      ["orderDay"],
+                                                      ["status"],
                                                 ),
                                                 const Expanded(
                                                     child: SizedBox()),
                                                 cText(
-                                                  "Trạng thái:",
+                                                  "Ngày tạo:",
                                                   orderSnap.data!.docs[index]
-                                                      ["status"],
+                                                      ["orderDay"],
                                                 ),
                                               ],
                                             ),
@@ -422,8 +422,10 @@ class _NewOrdersState extends State<NewOrders> {
                                                     child: ElevatedButton(
                                                       style: ElevatedButton
                                                           .styleFrom(
+                                                        backgroundColor:
+                                                            MColors.background,
                                                         minimumSize: const Size
-                                                            .fromHeight(45),
+                                                            .fromHeight(50),
                                                       ),
                                                       onPressed: () async {
                                                         var t = DateTime.now();

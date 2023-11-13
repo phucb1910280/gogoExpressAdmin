@@ -111,16 +111,16 @@ class _PickingOrdersState extends State<ImportingOrders> {
                                                   const Expanded(
                                                       child: SizedBox()),
                                                   cText(
-                                                    "Ngày tạo:",
+                                                    "Trạng thái:",
                                                     orderSnap.data!.docs[index]
-                                                        ["orderDay"],
+                                                        ["status"],
                                                   ),
                                                   const Expanded(
                                                       child: SizedBox()),
                                                   cText(
-                                                    "Trạng thái:",
+                                                    "Ngày tạo:",
                                                     orderSnap.data!.docs[index]
-                                                        ["status"],
+                                                        ["orderDay"],
                                                   ),
                                                 ],
                                               ),
@@ -454,6 +454,10 @@ class _PickingOrdersState extends State<ImportingOrders> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: MColors.background,
+                                      minimumSize: const Size.fromHeight(50),
+                                    ),
                                     onPressed: () async {
                                       var t = DateTime.now();
                                       String newLog =

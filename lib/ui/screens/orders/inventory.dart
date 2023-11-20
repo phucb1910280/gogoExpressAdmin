@@ -22,6 +22,7 @@ class _InventoryState extends State<Inventory> {
           title,
           style: const TextStyle(
             fontSize: 16,
+            color: MColors.white,
           ),
         ),
         const SizedBox(
@@ -31,6 +32,7 @@ class _InventoryState extends State<Inventory> {
           content,
           style: const TextStyle(
             fontSize: 18,
+            color: MColors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -69,7 +71,7 @@ class _InventoryState extends State<Inventory> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             width: 1,
-                            color: MColors.blue,
+                            color: MColors.darkBlue3,
                           ),
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -84,7 +86,7 @@ class _InventoryState extends State<Inventory> {
                                     decoration: const BoxDecoration(
                                       border: Border(
                                         right: BorderSide(
-                                          color: MColors.blue,
+                                          color: MColors.darkBlue3,
                                           width: 1,
                                         ),
                                       ),
@@ -95,7 +97,7 @@ class _InventoryState extends State<Inventory> {
                                         children: [
                                           Container(
                                             decoration: BoxDecoration(
-                                              color: MColors.background,
+                                              color: MColors.darkBlue3,
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                             ),
@@ -134,7 +136,7 @@ class _InventoryState extends State<Inventory> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
                                                     child: StreamBuilder(
                                                       stream: FirebaseFirestore
@@ -167,7 +169,7 @@ class _InventoryState extends State<Inventory> {
                                                                     fontSize:
                                                                         15,
                                                                     color: MColors
-                                                                        .blue,
+                                                                        .darkBlue3,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
@@ -222,7 +224,7 @@ class _InventoryState extends State<Inventory> {
                                                 ),
                                                 const SizedBox(width: 20),
                                                 Expanded(
-                                                  flex: 1,
+                                                  flex: 2,
                                                   child: SizedBox(
                                                     child: StreamBuilder(
                                                       stream: FirebaseFirestore
@@ -245,13 +247,13 @@ class _InventoryState extends State<Inventory> {
                                                                 right:
                                                                     BorderSide(
                                                                   color: MColors
-                                                                      .blue,
+                                                                      .darkBlue3,
                                                                   width: 1,
                                                                 ),
                                                                 left:
                                                                     BorderSide(
                                                                   color: MColors
-                                                                      .blue,
+                                                                      .darkBlue3,
                                                                   width: 1,
                                                                 ),
                                                               ),
@@ -274,7 +276,7 @@ class _InventoryState extends State<Inventory> {
                                                                       fontSize:
                                                                           15,
                                                                       color: MColors
-                                                                          .blue,
+                                                                          .darkBlue3,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .bold,
@@ -334,7 +336,7 @@ class _InventoryState extends State<Inventory> {
                                                                           style:
                                                                               TextStyle(
                                                                             color:
-                                                                                MColors.blue,
+                                                                                MColors.darkBlue3,
                                                                             fontSize:
                                                                                 15,
                                                                             fontWeight:
@@ -409,7 +411,8 @@ class _InventoryState extends State<Inventory> {
                                                         "ẢNH LẤY HÀNG",
                                                         style: TextStyle(
                                                           fontSize: 15,
-                                                          color: MColors.blue,
+                                                          color:
+                                                              MColors.darkBlue3,
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           fontStyle:
@@ -477,7 +480,9 @@ class _InventoryState extends State<Inventory> {
                                                     style: ElevatedButton
                                                         .styleFrom(
                                                       backgroundColor:
-                                                          MColors.background,
+                                                          MColors.darkBlue3,
+                                                      foregroundColor:
+                                                          MColors.white,
                                                       minimumSize:
                                                           const Size.fromHeight(
                                                         50,

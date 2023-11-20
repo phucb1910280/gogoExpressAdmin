@@ -104,7 +104,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  color: MColors.background,
+                                                  color: Colors.blue[100],
                                                   borderRadius:
                                                       BorderRadius.circular(10),
                                                 ),
@@ -514,7 +514,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             width: 1,
-                            color: MColors.yellow,
+                            color: MColors.orange,
                           ),
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -562,7 +562,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                       Container(
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                            color: MColors.yellow,
+                                            color: MColors.orange,
                                             width: 1,
                                           ),
                                           borderRadius:
@@ -616,7 +616,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                           border: Border(
                                                             right: BorderSide(
                                                               color: MColors
-                                                                  .yellow,
+                                                                  .orange,
                                                               width: 1,
                                                             ),
                                                           ),
@@ -638,7 +638,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                     TextStyle(
                                                                   fontSize: 15,
                                                                   color: MColors
-                                                                      .yellow,
+                                                                      .orange,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -710,7 +710,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                           border: Border(
                                                             right: BorderSide(
                                                               color: MColors
-                                                                  .yellow,
+                                                                  .orange,
                                                               width: 1,
                                                             ),
                                                           ),
@@ -732,7 +732,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                     TextStyle(
                                                                   fontSize: 15,
                                                                   color: MColors
-                                                                      .yellow,
+                                                                      .orange,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -841,7 +841,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                   const Text(
                                                     "LOG VẬN CHUYỂN",
                                                     style: TextStyle(
-                                                      color: MColors.yellow,
+                                                      color: MColors.orange,
                                                       fontSize: 15,
                                                       fontWeight:
                                                           FontWeight.bold,

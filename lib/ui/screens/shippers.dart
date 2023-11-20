@@ -111,265 +111,301 @@ class _ShippersScreenState extends State<ShippersScreen> {
           ),
         ),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      hideFunction = !hideFunction;
-                    });
-                  },
-                  child: Text(hideFunction == false ? "Hủy" : "Thêm nhân viên"),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    hideFunction = !hideFunction;
+                  });
+                },
+                child: Text(hideFunction == false ? "Hủy" : "Thêm nhân viên"),
+              ),
+              const SizedBox(height: 20),
+              hideFunction == false
+                  ? SizedBox(
+                      height: 450,
+                      child: formAddShipper(),
+                    )
+                  : const SizedBox(),
+              const SizedBox(height: 20),
+              const Text(
+                "DANH SÁCH NHÂN VIÊN",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(height: 20),
-                hideFunction == false
-                    ? SizedBox(
-                        height: 450,
-                        child: formAddShipper(),
-                      )
-                    : const SizedBox(),
-                const SizedBox(height: 20),
-                const Text(
-                  "DANH SÁCH NHÂN VIÊN",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Center(
-                  child: SizedBox(
-                    width: 1000,
-                    child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection("Shippers")
-                          .snapshots(),
-                      builder: (context, shipperSnap) {
-                        if (shipperSnap.hasData) {
-                          return ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: shipperSnap.data!.docs.isNotEmpty
-                                ? shipperSnap.data!.docs.length
-                                : 0,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        width: 1,
-                                        color: MColors.darkBlue3,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20),
+              ),
+              const SizedBox(height: 10),
+              Center(
+                child: SizedBox(
+                  width: 1000,
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("Shippers")
+                        .snapshots(),
+                    builder: (context, shipperSnap) {
+                      if (shipperSnap.hasData) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: shipperSnap.data!.docs.isNotEmpty
+                              ? shipperSnap.data!.docs.length
+                              : 0,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 1,
+                                      color: MColors.darkBlue3,
                                     ),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                flex: 1,
-                                                child: Column(
-                                                  children: [
-                                                    Container(
-                                                      decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                          fit: BoxFit.cover,
-                                                          image: NetworkImage(
-                                                            shipperSnap.data!
-                                                                    .docs[index]
-                                                                ["profileImg"],
-                                                          ),
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          15,
-                                                        ),
-                                                      ),
-                                                      height: 250,
-                                                      width: 250,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: MText(
-                                                        title: "Họ tên:",
-                                                        content: shipperSnap
-                                                                .data!
-                                                                .docs[index]
-                                                            ["fullName"],
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: MText(
-                                                        title: "Giới tính:",
-                                                        content: shipperSnap
-                                                                .data!
-                                                                .docs[index]
-                                                            ["gender"],
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: MText(
-                                                        title: "Ngày sinh:",
-                                                        content: shipperSnap
-                                                                .data!
-                                                                .docs[index]
-                                                            ["dayOfBirth"],
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: MText(
-                                                        title: "CCCD:",
-                                                        content: shipperSnap
-                                                                .data!
-                                                                .docs[index]
-                                                            ["cccd"],
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: MText(
-                                                        title: "Điện thoại:",
-                                                        content: shipperSnap
-                                                                .data!
-                                                                .docs[index]
-                                                            ["phoneNumber"],
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: MText(
-                                                        title: "Email:",
-                                                        content: shipperSnap
-                                                                .data!
-                                                                .docs[index]
-                                                            ["email"],
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: MText(
-                                                        title: "Thường trú:",
-                                                        content: shipperSnap
-                                                                .data!
-                                                                .docs[index]
-                                                            ["mainAddress"],
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: MText(
-                                                        title: "Tạm trú:",
-                                                        content: shipperSnap
-                                                                .data!
-                                                                .docs[index]
-                                                            ["secondAddress"],
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: MText(
-                                                        title: "Bưu cục:",
-                                                        content: shipperSnap
-                                                                .data!
-                                                                .docs[index]
-                                                            ["postOffice"],
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: MText(
-                                                        title: "Ngày tham gia:",
-                                                        content: shipperSnap
-                                                                .data!
-                                                                .docs[index]
-                                                            ["joinDay"],
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
-                                  const SizedBox(
-                                    height: 10,
-                                  )
-                                ],
-                              );
-                            },
-                          );
-                        } else {
-                          return const Center(child: Text("Error"));
-                        }
-                      },
-                    ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image: NetworkImage(
+                                                      shipperSnap
+                                                              .data!.docs[index]
+                                                          ["profileImg"],
+                                                    ),
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    15,
+                                                  ),
+                                                ),
+                                                height: 250,
+                                                width: 250,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 20),
+                                            Expanded(
+                                              flex: 2,
+                                              child: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: MText(
+                                                      title: "Họ tên:",
+                                                      content: shipperSnap
+                                                              .data!.docs[index]
+                                                          ["fullName"],
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: MText(
+                                                      title: "Giới tính:",
+                                                      content: shipperSnap
+                                                              .data!.docs[index]
+                                                          ["gender"],
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: MText(
+                                                      title: "Ngày sinh:",
+                                                      content: shipperSnap
+                                                              .data!.docs[index]
+                                                          ["dayOfBirth"],
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: MText(
+                                                      title: "CCCD:",
+                                                      content: shipperSnap.data!
+                                                          .docs[index]["cccd"],
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: MText(
+                                                      title: "Điện thoại:",
+                                                      content: shipperSnap
+                                                              .data!.docs[index]
+                                                          ["phoneNumber"],
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: MText(
+                                                      title: "Email:",
+                                                      content: shipperSnap.data!
+                                                          .docs[index]["email"],
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 2,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 10),
+                                                child: Container(
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    border: Border(
+                                                      right: BorderSide(
+                                                        color: MColors.darkBlue,
+                                                        width: 0.5,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: MText(
+                                                          title: "Thường trú:",
+                                                          content: shipperSnap
+                                                                  .data!
+                                                                  .docs[index]
+                                                              ["mainAddress"],
+                                                          size: 18,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: MText(
+                                                          title: "Tạm trú:",
+                                                          content: shipperSnap
+                                                                  .data!
+                                                                  .docs[index]
+                                                              ["secondAddress"],
+                                                          size: 18,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: MText(
+                                                          title: "Bưu cục:",
+                                                          content: shipperSnap
+                                                                  .data!
+                                                                  .docs[index]
+                                                              ["postOffice"],
+                                                          size: 18,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: MText(
+                                                          title:
+                                                              "Ngày tham gia:",
+                                                          content: shipperSnap
+                                                                  .data!
+                                                                  .docs[index]
+                                                              ["joinDay"],
+                                                          size: 18,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: SizedBox(
+                                                child: Column(
+                                                  children: [
+                                                    ElevatedButton(
+                                                      onPressed: () {},
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        minimumSize: const Size
+                                                            .fromHeight(
+                                                          50,
+                                                        ),
+                                                      ),
+                                                      child: const Text("Sửa"),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    ElevatedButton(
+                                                      onPressed: () {},
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        minimumSize: const Size
+                                                            .fromHeight(
+                                                          50,
+                                                        ),
+                                                      ),
+                                                      child: const Text("Xóa"),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                )
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        return const Center(child: Text("Đang tải"));
+                      }
+                    },
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -906,6 +942,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                   email: email.text.trim(),
                                   password: password.text.trim());
                           await addShipperData(email.text.trim());
+
                           resetTextController();
                           setState(() {
                             hideFunction = true;

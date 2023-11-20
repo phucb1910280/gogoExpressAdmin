@@ -64,7 +64,7 @@ class _NewOrdersState extends State<NewOrders> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             width: 1,
-                            color: MColors.blue,
+                            color: MColors.darkPink,
                           ),
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -78,7 +78,7 @@ class _NewOrdersState extends State<NewOrders> {
                                   decoration: const BoxDecoration(
                                     border: Border(
                                       right: BorderSide(
-                                        color: MColors.blue,
+                                        color: MColors.darkPink,
                                         width: 1,
                                       ),
                                     ),
@@ -89,7 +89,7 @@ class _NewOrdersState extends State<NewOrders> {
                                       children: [
                                         Container(
                                           decoration: BoxDecoration(
-                                            color: MColors.background,
+                                            color: MColors.lightPink,
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),
@@ -150,7 +150,7 @@ class _NewOrdersState extends State<NewOrders> {
                                                               style: TextStyle(
                                                                 fontSize: 15,
                                                                 color: MColors
-                                                                    .blue,
+                                                                    .darkPink,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold,
@@ -223,12 +223,12 @@ class _NewOrdersState extends State<NewOrders> {
                                                             border: Border(
                                                               right: BorderSide(
                                                                 color: MColors
-                                                                    .blue,
+                                                                    .darkPink,
                                                                 width: 1,
                                                               ),
                                                               left: BorderSide(
                                                                 color: MColors
-                                                                    .blue,
+                                                                    .darkPink,
                                                                 width: 1,
                                                               ),
                                                             ),
@@ -251,7 +251,7 @@ class _NewOrdersState extends State<NewOrders> {
                                                                     fontSize:
                                                                         15,
                                                                     color: MColors
-                                                                        .blue,
+                                                                        .darkPink,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
@@ -315,7 +315,7 @@ class _NewOrdersState extends State<NewOrders> {
                                                     const Text(
                                                       "THÔNG TIN THANH TOÁN",
                                                       style: TextStyle(
-                                                        color: MColors.blue,
+                                                        color: MColors.darkPink,
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -423,7 +423,9 @@ class _NewOrdersState extends State<NewOrders> {
                                                       style: ElevatedButton
                                                           .styleFrom(
                                                         backgroundColor:
-                                                            MColors.background,
+                                                            MColors.lightPink,
+                                                        foregroundColor:
+                                                            MColors.black,
                                                         minimumSize: const Size
                                                             .fromHeight(50),
                                                       ),

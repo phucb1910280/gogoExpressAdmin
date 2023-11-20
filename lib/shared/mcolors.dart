@@ -5,6 +5,7 @@ class MColors extends Material {
   static const darkBlue2 = Color(0xff268ab2);
   static const lightBlue = Color(0xff9fccfa);
   static const lightBlue2 = Color(0xffbac8e0);
+  static const lightBlue3 = Color(0xffc9def4);
   static const darkBlue3 = Color(0xff6a85b6);
   static const blue = Color(0xff2193b0);
   static const error = Color(0xFFB3261E);
@@ -19,9 +20,11 @@ class MColors extends Material {
   static const lightOrange = Color(0xfffa9372);
   static const lightRed = Color.fromARGB(255, 192, 63, 106);
   static const purple = Color.fromARGB(255, 127, 77, 177);
+  static const lightPurple = Color(0xffb8a4c9);
   static const darkPink = Color.fromARGB(255, 152, 58, 119);
   static const pink = Color.fromARGB(255, 255, 164, 190);
   static const lightPink = Color(0xffc7b3cc);
+  static const lightPink2 = Color(0xfff5ccd4);
 
   const MColors({super.key});
 }

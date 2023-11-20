@@ -102,7 +102,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                  color: MColors.background,
+                                                  color: Colors.blue[100],
                                                   borderRadius:
                                                       BorderRadius.circular(10),
                                                 ),
@@ -512,7 +512,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             width: 1,
-                            color: MColors.yellow,
+                            color: MColors.orange,
                           ),
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -560,7 +560,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                       Container(
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                            color: MColors.yellow,
+                                            color: MColors.orange,
                                             width: 1,
                                           ),
                                           borderRadius:
@@ -614,7 +614,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                           border: Border(
                                                             right: BorderSide(
                                                               color: MColors
-                                                                  .yellow,
+                                                                  .orange,
                                                               width: 1,
                                                             ),
                                                           ),
@@ -636,7 +636,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                     TextStyle(
                                                                   fontSize: 15,
                                                                   color: MColors
-                                                                      .yellow,
+                                                                      .orange,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -708,7 +708,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                           border: Border(
                                                             right: BorderSide(
                                                               color: MColors
-                                                                  .yellow,
+                                                                  .orange,
                                                               width: 1,
                                                             ),
                                                           ),
@@ -730,7 +730,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                     TextStyle(
                                                                   fontSize: 15,
                                                                   color: MColors
-                                                                      .yellow,
+                                                                      .orange,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold,
@@ -839,7 +839,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                   const Text(
                                                     "LỊCH SỬ VẬN CHUYỂN",
                                                     style: TextStyle(
-                                                      color: MColors.yellow,
+                                                      color: MColors.orange,
                                                       fontSize: 15,
                                                       fontWeight:
                                                           FontWeight.bold,

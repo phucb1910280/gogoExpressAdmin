@@ -26,7 +26,7 @@ class _NewOrdersState extends State<NewOrders> {
         const SizedBox(
           width: 10,
         ),
-        Text(
+        SelectableText(
           content,
           style: const TextStyle(
             fontSize: 18,
@@ -89,7 +89,7 @@ class _NewOrdersState extends State<NewOrders> {
                                       children: [
                                         Container(
                                           decoration: BoxDecoration(
-                                            color: MColors.lightPink,
+                                            color: Pastel.pink,
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),
@@ -161,7 +161,7 @@ class _NewOrdersState extends State<NewOrders> {
                                                             ),
                                                             const SizedBox(
                                                                 height: 8),
-                                                            Text(
+                                                            SelectableText(
                                                               "${userSnap.data!["fullName"]}",
                                                               style:
                                                                   const TextStyle(
@@ -173,7 +173,7 @@ class _NewOrdersState extends State<NewOrders> {
                                                             ),
                                                             const SizedBox(
                                                                 height: 8),
-                                                            Text(
+                                                            SelectableText(
                                                               "Điện thoại: ${userSnap.data!["phoneNumber"]}",
                                                               style:
                                                                   const TextStyle(
@@ -182,7 +182,7 @@ class _NewOrdersState extends State<NewOrders> {
                                                             ),
                                                             const SizedBox(
                                                                 height: 8),
-                                                            Text(
+                                                            SelectableText(
                                                               "Địa chỉ: ${userSnap.data!["address"]}",
                                                               style:
                                                                   const TextStyle(
@@ -262,7 +262,7 @@ class _NewOrdersState extends State<NewOrders> {
                                                                 ),
                                                                 const SizedBox(
                                                                     height: 8),
-                                                                Text(
+                                                                SelectableText(
                                                                   "${supplierSnap.data!["brand"]}",
                                                                   style:
                                                                       const TextStyle(
@@ -275,7 +275,7 @@ class _NewOrdersState extends State<NewOrders> {
                                                                 ),
                                                                 const SizedBox(
                                                                     height: 8),
-                                                                Text(
+                                                                SelectableText(
                                                                   "Điện thoại: ${supplierSnap.data!["phoneNumber"]}",
                                                                   style:
                                                                       const TextStyle(
@@ -285,7 +285,7 @@ class _NewOrdersState extends State<NewOrders> {
                                                                 ),
                                                                 const SizedBox(
                                                                     height: 8),
-                                                                Text(
+                                                                SelectableText(
                                                                   "Địa chỉ: ${supplierSnap.data!["address"]}",
                                                                   style:
                                                                       const TextStyle(
@@ -423,7 +423,7 @@ class _NewOrdersState extends State<NewOrders> {
                                                       style: ElevatedButton
                                                           .styleFrom(
                                                         backgroundColor:
-                                                            MColors.lightPink,
+                                                            Pastel.pink,
                                                         foregroundColor:
                                                             MColors.black,
                                                         minimumSize: const Size

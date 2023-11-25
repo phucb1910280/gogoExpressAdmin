@@ -28,7 +28,7 @@ class _InventoryState extends State<Inventory> {
         const SizedBox(
           width: 10,
         ),
-        Text(
+        SelectableText(
           content,
           style: const TextStyle(
             fontSize: 18,
@@ -180,7 +180,7 @@ class _InventoryState extends State<Inventory> {
                                                                 ),
                                                                 const SizedBox(
                                                                     height: 8),
-                                                                Text(
+                                                                SelectableText(
                                                                   "${supplierSnap.data!["brand"]}",
                                                                   style:
                                                                       const TextStyle(
@@ -193,7 +193,7 @@ class _InventoryState extends State<Inventory> {
                                                                 ),
                                                                 const SizedBox(
                                                                     height: 8),
-                                                                Text(
+                                                                SelectableText(
                                                                   "Điện thoại: ${supplierSnap.data!["phoneNumber"]}",
                                                                   style:
                                                                       const TextStyle(
@@ -203,7 +203,7 @@ class _InventoryState extends State<Inventory> {
                                                                 ),
                                                                 const SizedBox(
                                                                     height: 8),
-                                                                Text(
+                                                                SelectableText(
                                                                   "Địa chỉ: ${supplierSnap.data!["address"]}",
                                                                   style:
                                                                       const TextStyle(
@@ -297,7 +297,7 @@ class _InventoryState extends State<Inventory> {
                                                                       children: [
                                                                         SizedBox(
                                                                           child:
-                                                                              Text(
+                                                                              SelectableText(
                                                                             "${pickupSnap.data!["fullName"]}",
                                                                             style:
                                                                                 const TextStyle(
@@ -309,7 +309,7 @@ class _InventoryState extends State<Inventory> {
                                                                         const SizedBox(
                                                                             height:
                                                                                 5),
-                                                                        Text(
+                                                                        SelectableText(
                                                                           "Điện thoại: ${pickupSnap.data!["phoneNumber"]}",
                                                                           style:
                                                                               const TextStyle(
@@ -420,13 +420,23 @@ class _InventoryState extends State<Inventory> {
                                                         ),
                                                       ),
                                                       const SizedBox(height: 8),
-                                                      SizedBox(
+                                                      Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          image:
+                                                              DecorationImage(
+                                                            image: NetworkImage(
+                                                              orderS[
+                                                                  "pickupImg"],
+                                                            ),
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
                                                         height: 150,
                                                         width: 150,
-                                                        child: Image.network(
-                                                          orderS["pickupImg"],
-                                                          fit: BoxFit.cover,
-                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -451,13 +461,36 @@ class _InventoryState extends State<Inventory> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: MColors.darkBlue3,
+                                        foregroundColor: MColors.white,
+                                        minimumSize: const Size.fromHeight(
+                                          50,
+                                        ),
+                                      ),
+                                      child: const Text(
+                                        "In đơn hàng",
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 25,
+                                      child: Divider(
+                                        color: MColors.darkBlue,
+                                        thickness: 0.5,
+                                      ),
+                                    ),
                                     const Text(
                                       "Điều phối giao hàng",
                                       style: TextStyle(
                                         fontSize: 18,
                                       ),
                                     ),
-                                    const SizedBox(height: 15),
+                                    const SizedBox(height: 5),
                                     SizedBox(
                                       height: 150,
                                       child: StreamBuilder(

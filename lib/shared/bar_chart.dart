@@ -23,37 +23,37 @@ class MyBarChart extends StatelessWidget {
             groupsSpace: 10,
             barGroups: [
               BarChartGroupData(x: 1, barRods: [
-                BarChartRodData(toY: 55, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 5, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 2, barRods: [
-                BarChartRodData(toY: 49, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 9, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 3, barRods: [
-                BarChartRodData(toY: 64, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 6, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 4, barRods: [
-                BarChartRodData(toY: 72, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 7, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 5, barRods: [
-                BarChartRodData(toY: 57, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 5, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 6, barRods: [
-                BarChartRodData(toY: 44, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 4, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 7, barRods: [
-                BarChartRodData(toY: 88, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 8, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 8, barRods: [
-                BarChartRodData(toY: 77, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 7, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 9, barRods: [
-                BarChartRodData(toY: 69, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 9, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 10, barRods: [
-                BarChartRodData(toY: 71, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 5, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 11, barRods: [
-                BarChartRodData(toY: 58, width: 15, color: Colors.teal),
+                BarChartRodData(toY: 2, width: 15, color: Colors.teal),
               ]),
               BarChartGroupData(x: 12, barRods: [
                 BarChartRodData(toY: 0, width: 15, color: Colors.amber),

@@ -22,7 +22,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
         const SizedBox(
           width: 10,
         ),
-        Text(
+        SelectableText(
           content,
           style: const TextStyle(
             fontSize: 18,
@@ -205,7 +205,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                       const SizedBox(
                                                                           height:
                                                                               8),
-                                                                      Text(
+                                                                      SelectableText(
                                                                         "${customerSnap.data!["fullName"]}",
                                                                         style:
                                                                             const TextStyle(
@@ -218,7 +218,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                       const SizedBox(
                                                                           height:
                                                                               8),
-                                                                      Text(
+                                                                      SelectableText(
                                                                         "Điện thoại: ${customerSnap.data!["phoneNumber"]}",
                                                                         style:
                                                                             const TextStyle(
@@ -229,7 +229,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                       const SizedBox(
                                                                           height:
                                                                               8),
-                                                                      Text(
+                                                                      SelectableText(
                                                                         "Địa chỉ: ${customerSnap.data!["address"]}",
                                                                         style:
                                                                             const TextStyle(
@@ -322,6 +322,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                               height: 100,
                                                                               width: 100,
                                                                               decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(5),
                                                                                 image: DecorationImage(
                                                                                   image: NetworkImage("${shipperSnap.data!["profileImg"]}"),
                                                                                   fit: BoxFit.cover,
@@ -341,7 +342,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                               children: [
                                                                                 SizedBox(
-                                                                                  child: Text(
+                                                                                  child: SelectableText(
                                                                                     "${shipperSnap.data!["fullName"]}",
                                                                                     style: const TextStyle(
                                                                                       fontSize: 20,
@@ -350,7 +351,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                                   ),
                                                                                 ),
                                                                                 const SizedBox(height: 8),
-                                                                                Text(
+                                                                                SelectableText(
                                                                                   "Điện thoại: ${shipperSnap.data!["phoneNumber"]}",
                                                                                   style: const TextStyle(
                                                                                     fontSize: 16,
@@ -358,7 +359,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                                 ),
                                                                                 const SizedBox(height: 8),
                                                                                 SizedBox(
-                                                                                  child: Text(
+                                                                                  child: SelectableText(
                                                                                     "Email: ${shipperSnap.data!["email"]}",
                                                                                     style: const TextStyle(
                                                                                       fontSize: 16,
@@ -649,7 +650,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                               ),
                                                               const SizedBox(
                                                                   height: 8),
-                                                              Text(
+                                                              SelectableText(
                                                                 "${customerSnap.data!["fullName"]}",
                                                                 style:
                                                                     const TextStyle(
@@ -661,7 +662,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                               ),
                                                               const SizedBox(
                                                                   height: 8),
-                                                              Text(
+                                                              SelectableText(
                                                                 "Điện thoại: ${customerSnap.data!["phoneNumber"]}",
                                                                 style:
                                                                     const TextStyle(
@@ -670,7 +671,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                               ),
                                                               const SizedBox(
                                                                   height: 8),
-                                                              Text(
+                                                              SelectableText(
                                                                 "Địa chỉ: ${customerSnap.data!["address"]}",
                                                                 style:
                                                                     const TextStyle(
@@ -758,6 +759,8 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                           100,
                                                                       decoration:
                                                                           BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
                                                                         image:
                                                                             DecorationImage(
                                                                           image:
@@ -781,7 +784,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                       children: [
                                                                         SizedBox(
                                                                           child:
-                                                                              Text(
+                                                                              SelectableText(
                                                                             "${shipperSnap.data!["fullName"]}",
                                                                             style:
                                                                                 const TextStyle(
@@ -793,7 +796,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                         const SizedBox(
                                                                             height:
                                                                                 8),
-                                                                        Text(
+                                                                        SelectableText(
                                                                           "Điện thoại: ${shipperSnap.data!["phoneNumber"]}",
                                                                           style:
                                                                               const TextStyle(
@@ -806,7 +809,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                                                                 8),
                                                                         SizedBox(
                                                                           child:
-                                                                              Text(
+                                                                              SelectableText(
                                                                             "Email: ${shipperSnap.data!["email"]}",
                                                                             style:
                                                                                 const TextStyle(

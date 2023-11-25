@@ -235,7 +235,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                   height: 30,
                 ),
                 const Text(
-                  "Số đơn hàng trong các tháng",
+                  "Đơn hàng đã giao trong năm",
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -243,7 +243,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                MyBarChart(),
+                const MyBarChart(),
               ],
             ),
           ),

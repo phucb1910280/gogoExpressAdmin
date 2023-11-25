@@ -22,7 +22,7 @@ class _PickingOrdersState extends State<PickingOrders> {
         const SizedBox(
           width: 10,
         ),
-        Text(
+        SelectableText(
           content,
           style: const TextStyle(
             fontSize: 18,
@@ -203,7 +203,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                       const SizedBox(
                                                                           height:
                                                                               8),
-                                                                      Text(
+                                                                      SelectableText(
                                                                         "${supplierSnap.data!["brand"]}",
                                                                         style:
                                                                             const TextStyle(
@@ -216,7 +216,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                       const SizedBox(
                                                                           height:
                                                                               8),
-                                                                      Text(
+                                                                      SelectableText(
                                                                         "Điện thoại: ${supplierSnap.data!["phoneNumber"]}",
                                                                         style:
                                                                             const TextStyle(
@@ -227,7 +227,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                       const SizedBox(
                                                                           height:
                                                                               8),
-                                                                      Text(
+                                                                      SelectableText(
                                                                         "Địa chỉ: ${supplierSnap.data!["address"]}",
                                                                         style:
                                                                             const TextStyle(
@@ -320,6 +320,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                               height: 100,
                                                                               width: 100,
                                                                               decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(5),
                                                                                 image: DecorationImage(
                                                                                   image: NetworkImage("${pickupSnap.data!["profileImg"]}"),
                                                                                   fit: BoxFit.cover,
@@ -339,7 +340,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                               children: [
                                                                                 SizedBox(
-                                                                                  child: Text(
+                                                                                  child: SelectableText(
                                                                                     "${pickupSnap.data!["fullName"]}",
                                                                                     style: const TextStyle(
                                                                                       fontSize: 20,
@@ -348,7 +349,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                                   ),
                                                                                 ),
                                                                                 const SizedBox(height: 8),
-                                                                                Text(
+                                                                                SelectableText(
                                                                                   "Điện thoại: ${pickupSnap.data!["phoneNumber"]}",
                                                                                   style: const TextStyle(
                                                                                     fontSize: 16,
@@ -356,7 +357,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                                 ),
                                                                                 const SizedBox(height: 8),
                                                                                 SizedBox(
-                                                                                  child: Text(
+                                                                                  child: SelectableText(
                                                                                     "Email: ${pickupSnap.data!["email"]}",
                                                                                     style: const TextStyle(
                                                                                       fontSize: 16,
@@ -647,7 +648,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                               ),
                                                               const SizedBox(
                                                                   height: 8),
-                                                              Text(
+                                                              SelectableText(
                                                                 "${supplierSnap.data!["brand"]}",
                                                                 style:
                                                                     const TextStyle(
@@ -659,7 +660,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                               ),
                                                               const SizedBox(
                                                                   height: 8),
-                                                              Text(
+                                                              SelectableText(
                                                                 "Điện thoại: ${supplierSnap.data!["phoneNumber"]}",
                                                                 style:
                                                                     const TextStyle(
@@ -668,7 +669,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                               ),
                                                               const SizedBox(
                                                                   height: 8),
-                                                              Text(
+                                                              SelectableText(
                                                                 "Địa chỉ: ${supplierSnap.data!["address"]}",
                                                                 style:
                                                                     const TextStyle(
@@ -756,6 +757,8 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                           100,
                                                                       decoration:
                                                                           BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
                                                                         image:
                                                                             DecorationImage(
                                                                           image:
@@ -779,7 +782,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                       children: [
                                                                         SizedBox(
                                                                           child:
-                                                                              Text(
+                                                                              SelectableText(
                                                                             "${pickupSnap.data!["fullName"]}",
                                                                             style:
                                                                                 const TextStyle(
@@ -791,7 +794,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                         const SizedBox(
                                                                             height:
                                                                                 8),
-                                                                        Text(
+                                                                        SelectableText(
                                                                           "Điện thoại: ${pickupSnap.data!["phoneNumber"]}",
                                                                           style:
                                                                               const TextStyle(
@@ -804,7 +807,7 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                                                 8),
                                                                         SizedBox(
                                                                           child:
-                                                                              Text(
+                                                                              SelectableText(
                                                                             "Email: ${pickupSnap.data!["email"]}",
                                                                             style:
                                                                                 const TextStyle(

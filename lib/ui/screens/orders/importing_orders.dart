@@ -25,7 +25,7 @@ class _PickingOrdersState extends State<ImportingOrders> {
         const SizedBox(
           width: 10,
         ),
-        Text(
+        SelectableText(
           content,
           style: const TextStyle(
             fontSize: 18,
@@ -177,7 +177,7 @@ class _PickingOrdersState extends State<ImportingOrders> {
                                                                 ),
                                                                 const SizedBox(
                                                                     height: 8),
-                                                                Text(
+                                                                SelectableText(
                                                                   "${supplierSnap.data!["brand"]}",
                                                                   style:
                                                                       const TextStyle(
@@ -190,7 +190,7 @@ class _PickingOrdersState extends State<ImportingOrders> {
                                                                 ),
                                                                 const SizedBox(
                                                                     height: 8),
-                                                                Text(
+                                                                SelectableText(
                                                                   "Điện thoại: ${supplierSnap.data!["phoneNumber"]}",
                                                                   style:
                                                                       const TextStyle(
@@ -200,7 +200,7 @@ class _PickingOrdersState extends State<ImportingOrders> {
                                                                 ),
                                                                 const SizedBox(
                                                                     height: 8),
-                                                                Text(
+                                                                SelectableText(
                                                                   "Địa chỉ: ${supplierSnap.data!["address"]}",
                                                                   style:
                                                                       const TextStyle(
@@ -236,7 +236,6 @@ class _PickingOrdersState extends State<ImportingOrders> {
                                                           pickupSnap) {
                                                         if (pickupSnap
                                                             .hasData) {
-                                                          // orderS = pickupSnap;
                                                           return Container(
                                                             decoration:
                                                                 const BoxDecoration(
@@ -294,7 +293,7 @@ class _PickingOrdersState extends State<ImportingOrders> {
                                                                       children: [
                                                                         SizedBox(
                                                                           child:
-                                                                              Text(
+                                                                              SelectableText(
                                                                             "${pickupSnap.data!["fullName"]}",
                                                                             style:
                                                                                 const TextStyle(
@@ -306,7 +305,7 @@ class _PickingOrdersState extends State<ImportingOrders> {
                                                                         const SizedBox(
                                                                             height:
                                                                                 5),
-                                                                        Text(
+                                                                        SelectableText(
                                                                           "Điện thoại: ${pickupSnap.data!["phoneNumber"]}",
                                                                           style:
                                                                               const TextStyle(
@@ -417,13 +416,23 @@ class _PickingOrdersState extends State<ImportingOrders> {
                                                         ),
                                                       ),
                                                       const SizedBox(height: 8),
-                                                      SizedBox(
+                                                      Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          image:
+                                                              DecorationImage(
+                                                            image: NetworkImage(
+                                                              orderS[
+                                                                  "pickupImg"],
+                                                            ),
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
                                                         height: 150,
                                                         width: 150,
-                                                        child: Image.network(
-                                                          orderS["pickupImg"],
-                                                          fit: BoxFit.cover,
-                                                        ),
                                                       ),
                                                     ],
                                                   ),

@@ -27,7 +27,7 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
         const SizedBox(
           width: 10,
         ),
-        Text(
+        SelectableText(
           content,
           style: const TextStyle(
             fontSize: 18,
@@ -191,7 +191,7 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                                                   const SizedBox(
                                                                       height:
                                                                           8),
-                                                                  Text(
+                                                                  SelectableText(
                                                                     "${customerSnap.data!["fullName"]}",
                                                                     style:
                                                                         const TextStyle(
@@ -205,7 +205,7 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                                                   const SizedBox(
                                                                     height: 8,
                                                                   ),
-                                                                  Text(
+                                                                  SelectableText(
                                                                     "Điện thoại: ${customerSnap.data!["phoneNumber"]}",
                                                                     style:
                                                                         const TextStyle(
@@ -216,7 +216,7 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                                                   const SizedBox(
                                                                       height:
                                                                           8),
-                                                                  Text(
+                                                                  SelectableText(
                                                                     "Địa chỉ: ${customerSnap.data!["address"]}",
                                                                     style:
                                                                         const TextStyle(
@@ -349,7 +349,7 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                                                       children: [
                                                                         SizedBox(
                                                                           child:
-                                                                              Text(
+                                                                              SelectableText(
                                                                             "${pickupSnap.data!["fullName"]}",
                                                                             style:
                                                                                 const TextStyle(
@@ -361,7 +361,7 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                                                         const SizedBox(
                                                                             height:
                                                                                 5),
-                                                                        Text(
+                                                                        SelectableText(
                                                                           "Điện thoại: ${pickupSnap.data!["phoneNumber"]}",
                                                                           style:
                                                                               const TextStyle(
@@ -473,13 +473,26 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                                         ),
                                                         const SizedBox(
                                                             height: 8),
-                                                        SizedBox(
-                                                          height: 180,
-                                                          child: Image.network(
-                                                            orderS[
-                                                                "suscessfullDeliveryImg"],
-                                                            fit: BoxFit.cover,
+                                                        Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                              10,
+                                                            ),
+                                                            image:
+                                                                DecorationImage(
+                                                              image:
+                                                                  NetworkImage(
+                                                                orderS[
+                                                                    "suscessfullDeliveryImg"],
+                                                              ),
+                                                              fit: BoxFit.cover,
+                                                            ),
                                                           ),
+                                                          height: 150,
+                                                          width: 150,
                                                         ),
                                                       ],
                                                     ),

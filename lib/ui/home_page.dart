@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gogo_admin/shared/mcolors.dart';
 import 'package:gogo_admin/ui/screens/orders_overview.dart';
 import 'package:gogo_admin/ui/screens/overview.dart';
+import 'package:gogo_admin/ui/screens/search.dart';
 import 'package:gogo_admin/ui/screens/settings.dart';
 import 'package:gogo_admin/ui/screens/shippers.dart';
 
@@ -18,6 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> screens = [
     const OverviewScreen(),
+    const SearchScreen(),
     const OrdersOverview(),
     const ShippersScreen(),
     const SettingsScreen(),
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         child: Row(
           children: [
             NavigationRail(
-              backgroundColor: MColors.lightBlue3,
+              backgroundColor: Pastel.green30,
               useIndicator: true,
               extended: true,
               onDestinationSelected: (value) {
@@ -113,6 +115,11 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(Icons.dashboard_outlined),
                   selectedIcon: Icon(Icons.dashboard),
                   label: Text('Tổng quan'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.search),
+                  selectedIcon: Icon(Icons.search),
+                  label: Text('Tìm kiếm'),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.inventory_2_outlined),

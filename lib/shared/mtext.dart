@@ -32,7 +32,7 @@ class MText extends StatelessWidget {
           const SizedBox(width: 10),
           Flexible(
             child: SizedBox(
-              child: Text(
+              child: SelectableText(
                 content,
                 style: TextStyle(
                   fontSize: size ?? 16,

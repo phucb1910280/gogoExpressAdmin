@@ -31,7 +31,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
   String profileImg =
       "https://firebasestorage.googleapis.com/v0/b/gogoship-70cca.appspot.com/o/shipperProfileImages%2Fdfavt.png?alt=media&token=8805717a-9b9d-4b69-98bf-53b43f7f825d";
   double totalReceivedToday = 0;
-  String postOffice = "BC Ninh Kiều";
+  String postOffice = "ninhkieu@gogo.com";
 
   final List<String> deliveringOrders = [];
   final List<String> successfulDeliveryOrders = [];
@@ -102,37 +102,45 @@ class _ShippersScreenState extends State<ShippersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: const Text(
-          "Quản lý nhân viên",
-          style: TextStyle(
-            fontSize: 17,
-          ),
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    hideFunction = !hideFunction;
-                  });
-                },
-                child: Text(hideFunction == false ? "Hủy" : "Thêm nhân viên"),
+              SizedBox(
+                height: 40,
+                width: 180,
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      hideFunction = !hideFunction;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Pastel.blue,
+                      foregroundColor: MColors.black,
+                      minimumSize: const Size.fromHeight(40)),
+                  child: Text(hideFunction == false ? "Hủy" : "Thêm nhân viên"),
+                ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               hideFunction == false
                   ? SizedBox(
                       height: 450,
                       child: formAddShipper(),
                     )
                   : const SizedBox(),
-              const SizedBox(height: 20),
+              SizedBox(
+                height: hideFunction == false ? 40 : 5,
+                child: Divider(
+                  thickness: 1,
+                  color: Colors.grey[300],
+                ),
+              ),
+              SizedBox(
+                height: hideFunction == true ? 15 : 0,
+              ),
               const Text(
                 "DANH SÁCH NHÂN VIÊN",
                 style: TextStyle(
@@ -147,6 +155,8 @@ class _ShippersScreenState extends State<ShippersScreen> {
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection("Shippers")
+                        .where("postOffice",
+                            isEqualTo: FirebaseAuth.instance.currentUser!.email)
                         .snapshots(),
                     builder: (context, shipperSnap) {
                       if (shipperSnap.hasData) {
@@ -324,19 +334,6 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                                             const EdgeInsets
                                                                 .all(8.0),
                                                         child: MText(
-                                                          title: "Bưu cục:",
-                                                          content: shipperSnap
-                                                                  .data!
-                                                                  .docs[index]
-                                                              ["postOffice"],
-                                                          size: 18,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: MText(
                                                           title:
                                                               "Ngày tham gia:",
                                                           content: shipperSnap
@@ -360,6 +357,10 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                                       onPressed: () {},
                                                       style: ElevatedButton
                                                           .styleFrom(
+                                                        foregroundColor:
+                                                            MColors.black,
+                                                        backgroundColor:
+                                                            Colors.yellow[600],
                                                         minimumSize: const Size
                                                             .fromHeight(
                                                           50,
@@ -371,9 +372,21 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                                       height: 10,
                                                     ),
                                                     ElevatedButton(
-                                                      onPressed: () {},
+                                                      onPressed: () async =>
+                                                          await showCautionDialog(
+                                                        shipperSnap.data!
+                                                                .docs[index]
+                                                            ["email"],
+                                                        shipperSnap.data!
+                                                                .docs[index]
+                                                            ["fullName"],
+                                                      ),
                                                       style: ElevatedButton
                                                           .styleFrom(
+                                                        foregroundColor:
+                                                            MColors.white,
+                                                        backgroundColor:
+                                                            Colors.red[600],
                                                         minimumSize: const Size
                                                             .fromHeight(
                                                           50,
@@ -451,7 +464,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                 fontSize: 18,
                               ),
                               decoration: InputDecoration(
-                                hoverColor: MColors.lightBlue,
+                                hoverColor: Pastel.blue,
                                 counterText: "",
                                 border: InputBorder.none,
                                 focusedBorder: OutlineInputBorder(
@@ -507,7 +520,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                 fontSize: 18,
                               ),
                               decoration: InputDecoration(
-                                hoverColor: MColors.lightBlue,
+                                hoverColor: Pastel.blue,
                                 counterText: "",
                                 border: InputBorder.none,
                                 focusedBorder: OutlineInputBorder(
@@ -568,7 +581,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                 fontSize: 18,
                               ),
                               decoration: InputDecoration(
-                                hoverColor: MColors.lightBlue,
+                                hoverColor: Pastel.blue,
                                 counterText: "",
                                 border: InputBorder.none,
                                 focusedBorder: OutlineInputBorder(
@@ -645,7 +658,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                 fontSize: 18,
                               ),
                               decoration: InputDecoration(
-                                hoverColor: MColors.lightBlue,
+                                hoverColor: Pastel.blue,
                                 counterText: "",
                                 border: InputBorder.none,
                                 focusedBorder: OutlineInputBorder(
@@ -704,7 +717,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                 fontSize: 18,
                               ),
                               decoration: InputDecoration(
-                                hoverColor: MColors.lightBlue,
+                                hoverColor: Pastel.blue,
                                 counterText: "",
                                 border: InputBorder.none,
                                 focusedBorder: OutlineInputBorder(
@@ -761,7 +774,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                             fontSize: 18,
                           ),
                           decoration: InputDecoration(
-                            hoverColor: MColors.lightBlue,
+                            hoverColor: Pastel.blue,
                             counterText: "",
                             border: InputBorder.none,
                             focusedBorder: OutlineInputBorder(
@@ -817,7 +830,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                               fontSize: 18,
                             ),
                             decoration: InputDecoration(
-                              hoverColor: MColors.lightBlue,
+                              hoverColor: Pastel.blue,
                               counterText: "",
                               border: InputBorder.none,
                               focusedBorder: OutlineInputBorder(
@@ -878,7 +891,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                   fontSize: 18,
                                 ),
                                 decoration: InputDecoration(
-                                  hoverColor: MColors.lightBlue,
+                                  hoverColor: Pastel.blue,
                                   counterText: "",
                                   hintText: "8 - 10 ký tự",
                                   hintStyle: const TextStyle(
@@ -983,6 +996,93 @@ class _ShippersScreenState extends State<ShippersScreen> {
           },
         ),
       ),
+    );
+  }
+
+  Future<void> showCautionDialog(String id, String name) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Image.asset(
+                    "assets/images/caution.png",
+                    color: MColors.error,
+                    height: 150,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: Text(
+                      "Bạn có chắc muốn xóa nhân viên $name?",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            Row(
+              children: [
+                SizedBox(
+                  width: 200,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: MColors.white,
+                      backgroundColor: MColors.black,
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    child: const Text(
+                      "Hủy",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                SizedBox(
+                  width: 200,
+                  child: ElevatedButton(
+                    onPressed: () async => await FirebaseFirestore.instance
+                        .collection("Shippers")
+                        .doc(id)
+                        .update({
+                      "postOffice": "",
+                    }),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: MColors.white,
+                      backgroundColor: MColors.error,
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                    child: const Text(
+                      "Đồng ý",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

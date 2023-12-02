@@ -10,8 +10,6 @@ class Inventory extends StatefulWidget {
 }
 
 class _InventoryState extends State<Inventory> {
-  List<String> dvpList = [];
-  List<String> vvtList = [];
   // ignore: prefer_typing_uninitialized_variables
   var orderS;
 
@@ -47,8 +45,8 @@ class _InventoryState extends State<Inventory> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("Orders")
-              .where("status", isEqualTo: "Đã nhập kho")
+              .collection("DeliverOrders")
+              .where("trangThaiDonHang", isEqualTo: "Đã nhập kho")
               .snapshots(),
           builder: (context, orderSnap) {
             if (orderSnap.hasData) {
@@ -62,8 +60,8 @@ class _InventoryState extends State<Inventory> {
                     orderS = orderSnap.data!.docs[index];
                     List<String> log = [];
                     List<String> logReverse = [];
-                    log = List.from(
-                        orderSnap.data!.docs[index]["deliveryHistory"]);
+                    log =
+                        List.from(orderSnap.data!.docs[index]["logVanChuyen"]);
                     logReverse = log.reversed.toList();
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 10),
@@ -109,21 +107,21 @@ class _InventoryState extends State<Inventory> {
                                                   cText(
                                                     "Mã đơn:",
                                                     orderSnap.data!.docs[index]
-                                                        ["orderID"],
+                                                        ["id"],
                                                   ),
                                                   const Expanded(
                                                       child: SizedBox()),
                                                   cText(
                                                     "Trạng thái:",
                                                     orderSnap.data!.docs[index]
-                                                        ["status"],
+                                                        ["trangThaiDonHang"],
                                                   ),
                                                   const Expanded(
                                                       child: SizedBox()),
                                                   cText(
                                                     "Ngày tạo:",
                                                     orderSnap.data!.docs[index]
-                                                        ["orderDay"],
+                                                        ["ngayTaoDon"],
                                                   ),
                                                 ],
                                               ),
@@ -136,89 +134,54 @@ class _InventoryState extends State<Inventory> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Expanded(
-                                                  flex: 2,
+                                                  flex: 1,
                                                   child: SizedBox(
-                                                    child: StreamBuilder(
-                                                      stream: FirebaseFirestore
-                                                          .instance
-                                                          .collection(
-                                                              "Suppliers")
-                                                          .doc(orderSnap.data!
-                                                                  .docs[index]
-                                                              ["supplierID"])
-                                                          .snapshots(),
-                                                      builder: (context,
-                                                          supplierSnap) {
-                                                        if (supplierSnap
-                                                            .hasData) {
-                                                          return Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              horizontal: 15,
-                                                            ),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                const Text(
-                                                                  "NHÀ CUNG CẤP",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    color: MColors
-                                                                        .darkBlue3,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontStyle:
-                                                                        FontStyle
-                                                                            .italic,
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                    height: 8),
-                                                                SelectableText(
-                                                                  "${supplierSnap.data!["brand"]}",
-                                                                  style:
-                                                                      const TextStyle(
-                                                                    fontSize:
-                                                                        20,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                    height: 8),
-                                                                SelectableText(
-                                                                  "Điện thoại: ${supplierSnap.data!["phoneNumber"]}",
-                                                                  style:
-                                                                      const TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                  ),
-                                                                ),
-                                                                const SizedBox(
-                                                                    height: 8),
-                                                                SelectableText(
-                                                                  "Địa chỉ: ${supplierSnap.data!["address"]}",
-                                                                  style:
-                                                                      const TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          );
-                                                        } else {
-                                                          return const Text(
-                                                              "Error");
-                                                        }
-                                                      },
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const Text(
+                                                          "NGƯỜI GỬI",
+                                                          style: TextStyle(
+                                                            color: MColors
+                                                                .darkBlue3,
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontStyle: FontStyle
+                                                                .italic,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 8,
+                                                        ),
+                                                        SelectableText(
+                                                          "${orderSnap.data!.docs[index]["nguoiGui"]}",
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 20,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 8),
+                                                        SelectableText(
+                                                          "Điện thoại: ${orderSnap.data!.docs[index]["sdtNguoiGui"]}",
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 17,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 8),
+                                                        SelectableText(
+                                                          "Địa chỉ: ${orderSnap.data!.docs[index]["dcNguoiGui"]}",
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 17,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
@@ -233,7 +196,7 @@ class _InventoryState extends State<Inventory> {
                                                               "Shippers")
                                                           .doc(orderSnap.data!
                                                                   .docs[index]
-                                                              ["pickupStaffID"])
+                                                              ["maNVLayHang"])
                                                           .snapshots(),
                                                       builder: (context,
                                                           pickupSnap) {
@@ -241,6 +204,7 @@ class _InventoryState extends State<Inventory> {
                                                             .hasData) {
                                                           // orderS = pickupSnap;
                                                           return Container(
+                                                            height: 220,
                                                             decoration:
                                                                 const BoxDecoration(
                                                               border: Border(
@@ -286,8 +250,8 @@ class _InventoryState extends State<Inventory> {
                                                                     ),
                                                                   ),
                                                                   const SizedBox(
-                                                                      height:
-                                                                          8),
+                                                                    height: 8,
+                                                                  ),
                                                                   SizedBox(
                                                                     child:
                                                                         Column(
@@ -350,7 +314,7 @@ class _InventoryState extends State<Inventory> {
                                                                                 5),
                                                                         SizedBox(
                                                                           height:
-                                                                              80,
+                                                                              100,
                                                                           child:
                                                                               ListView.builder(
                                                                             shrinkWrap:
@@ -374,7 +338,7 @@ class _InventoryState extends State<Inventory> {
                                                                                       child: Text(
                                                                                         logReverse[index],
                                                                                         style: const TextStyle(
-                                                                                          fontSize: 16,
+                                                                                          fontSize: 18,
                                                                                         ),
                                                                                       ),
                                                                                     ),
@@ -383,7 +347,7 @@ class _InventoryState extends State<Inventory> {
                                                                               );
                                                                             },
                                                                           ),
-                                                                        )
+                                                                        ),
                                                                       ],
                                                                     ),
                                                                   ),
@@ -393,7 +357,7 @@ class _InventoryState extends State<Inventory> {
                                                           );
                                                         } else {
                                                           return const Text(
-                                                              "Error");
+                                                              "...");
                                                         }
                                                       },
                                                     ),
@@ -430,7 +394,7 @@ class _InventoryState extends State<Inventory> {
                                                               DecorationImage(
                                                             image: NetworkImage(
                                                               orderS[
-                                                                  "pickupImg"],
+                                                                  "anhLayHang"],
                                                             ),
                                                             fit: BoxFit.cover,
                                                           ),
@@ -531,25 +495,26 @@ class _InventoryState extends State<Inventory> {
                                                       deliveringOrders.add(
                                                           orderSnap.data!
                                                                   .docs[index]
-                                                              ["orderID"]);
+                                                              ["id"]);
                                                       var t = DateTime.now();
                                                       String newLog =
                                                           "${t.day}/${t.month}: Đang giao hàng";
                                                       log.add(newLog);
                                                       await FirebaseFirestore
                                                           .instance
-                                                          .collection("Orders")
+                                                          .collection(
+                                                              "DeliverOrders")
                                                           .doc(orderSnap.data!
                                                                   .docs[index]
-                                                              ["orderID"])
+                                                              ["id"])
                                                           .update({
-                                                        "status":
+                                                        "trangThaiDonHang":
                                                             "Đang giao hàng",
-                                                        "shipperID": snapshot
+                                                        "maNVGiaoHang": snapshot
                                                                 .data!
                                                                 .docs[index]
                                                             ["email"],
-                                                        "deliveryHistory":
+                                                        "logVanChuyen":
                                                             FieldValue
                                                                 .arrayUnion(
                                                           log,
@@ -581,7 +546,7 @@ class _InventoryState extends State<Inventory> {
                                               },
                                             );
                                           } else {
-                                            return const Text("Error");
+                                            return const Text("...");
                                           }
                                         },
                                       ),
@@ -599,7 +564,7 @@ class _InventoryState extends State<Inventory> {
               );
             } else {
               return const Center(
-                child: Text("Không có đơn mới"),
+                child: Text("Loading"),
               );
             }
           },

@@ -20,6 +20,8 @@ class _SearchItemState extends State<SearchItem> {
   bool orderExist = false;
   bool hasShipper = false;
   bool hasPicker = false;
+  bool gotOrderIMG = false;
+  bool deliveredOrderIMG = false;
 
   bool isLoading = true;
 
@@ -29,10 +31,12 @@ class _SearchItemState extends State<SearchItem> {
   List<String> reversedLog = [];
 
   var order;
-  var user;
-  var supplier;
   var picker;
   var shipper;
+
+  get onPressed => null;
+
+  get child => null;
 
   @override
   void initState() {
@@ -49,33 +53,35 @@ class _SearchItemState extends State<SearchItem> {
     var ship;
     var pick;
     var o = await FirebaseFirestore.instance
-        .collection("Orders")
+        .collection("DeliverOrders")
         .doc(widget.orderID)
         .get();
     if (o.exists) {
-      log = List.from(o["deliveryHistory"]);
-      var u = await FirebaseFirestore.instance
-          .collection("Users")
-          .doc(o["customerID"])
-          .get();
-      var s = await FirebaseFirestore.instance
-          .collection("Suppliers")
-          .doc(o["supplierID"])
-          .get();
-      if (o["shipperID"].isNotEmpty) {
+      log = List.from(o["logVanChuyen"]);
+      if (o["anhLayHang"].isNotEmpty) {
+        setState(() {
+          gotOrderIMG = true;
+        });
+      }
+      if (o["anhGiaoHang"].isNotEmpty) {
+        setState(() {
+          deliveredOrderIMG = true;
+        });
+      }
+      if (o["maNVGiaoHang"].isNotEmpty) {
         ship = await FirebaseFirestore.instance
             .collection("Shippers")
-            .doc(o["shipperID"])
+            .doc(o["maNVGiaoHang"])
             .get();
         setState(() {
           shipper = ship;
           hasShipper = true;
         });
       }
-      if (o["pickupStaffID"].isNotEmpty) {
+      if (o["maNVLayHang"].isNotEmpty) {
         pick = await FirebaseFirestore.instance
             .collection("Shippers")
-            .doc(o["pickupStaffID"])
+            .doc(o["maNVLayHang"])
             .get();
         setState(() {
           picker = pick;
@@ -86,8 +92,6 @@ class _SearchItemState extends State<SearchItem> {
       setState(() {
         reversedLog = log.reversed.toList();
         order = o;
-        user = u;
-        supplier = s;
         orderExist = true;
       });
     }
@@ -130,14 +134,14 @@ class _SearchItemState extends State<SearchItem> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: Row(
                                             children: [
-                                              cText("Mã đơn:",
-                                                  "${order["orderID"]}"),
+                                              cText(
+                                                  "Mã đơn:", "${order["id"]}"),
                                               const Expanded(child: SizedBox()),
                                               cText("Trạng thái:",
-                                                  "${order["status"]}"),
+                                                  "${order["trangThaiDonHang"]}"),
                                               const Expanded(child: SizedBox()),
                                               cText("Ngày tạo:",
-                                                  "${order["orderDay"]}"),
+                                                  "${order["ngayTaoDon"]}"),
                                             ],
                                           ),
                                         ),
@@ -152,69 +156,62 @@ class _SearchItemState extends State<SearchItem> {
                                           children: [
                                             Expanded(
                                               flex: 1,
-                                              child: Container(
-                                                decoration: const BoxDecoration(
-                                                  border: Border(
-                                                    right: BorderSide(
-                                                      color: MColors.darkBlue,
-                                                      width: 1,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Text(
+                                                      "NGƯỜI GỬI",
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontStyle:
+                                                            FontStyle.italic,
+                                                        color: MColors.darkBlue,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 10),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "NHÀ CUNG CẤP",
-                                                        style: TextStyle(
-                                                          fontSize: 18,
-                                                          fontStyle:
-                                                              FontStyle.italic,
-                                                          color:
-                                                              MColors.darkBlue,
-                                                        ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Text(
+                                                      "${order["nguoiGui"]}",
+                                                      style: const TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Text(
-                                                        "${supplier["brand"]}",
-                                                        style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      MText(
-                                                        title: "Điện thoại",
-                                                        content:
-                                                            "${supplier["phoneNumber"]}",
-                                                      ),
-                                                      MText(
-                                                        title: "Địa chỉ:",
-                                                        content:
-                                                            "${supplier["address"]}",
-                                                      ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    MText(
+                                                      title: "Điện thoại",
+                                                      content:
+                                                          "${order["sdtNguoiGui"]}",
+                                                    ),
+                                                    MText(
+                                                      title: "Địa chỉ:",
+                                                      content:
+                                                          "${order["dcNguoiGui"]}",
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
                                             Expanded(
                                               flex: 1,
                                               child: Container(
+                                                height: 150,
                                                 decoration: const BoxDecoration(
                                                   border: Border(
                                                     right: BorderSide(
+                                                      color: MColors.darkBlue,
+                                                      width: 1,
+                                                    ),
+                                                    left: BorderSide(
                                                       color: MColors.darkBlue,
                                                       width: 1,
                                                     ),
@@ -230,7 +227,7 @@ class _SearchItemState extends State<SearchItem> {
                                                             .start,
                                                     children: [
                                                       const Text(
-                                                        "KHÁCH HÀNG",
+                                                        "NGƯỜI NHẬN",
                                                         style: TextStyle(
                                                           fontSize: 18,
                                                           fontStyle:
@@ -243,7 +240,7 @@ class _SearchItemState extends State<SearchItem> {
                                                         height: 10,
                                                       ),
                                                       Text(
-                                                        "${user["fullName"]}",
+                                                        "${order["nguoiNhan"]}",
                                                         style: const TextStyle(
                                                           fontSize: 20,
                                                           fontWeight:
@@ -256,12 +253,12 @@ class _SearchItemState extends State<SearchItem> {
                                                       MText(
                                                         title: "Điện thoại",
                                                         content:
-                                                            "${user["phoneNumber"]}",
+                                                            "${order["sdtNguoiNhan"]}",
                                                       ),
                                                       MText(
                                                         title: "Địa chỉ:",
                                                         content:
-                                                            "${user["address"]}",
+                                                            "${order["dcNguoiNhan"]}",
                                                       ),
                                                     ],
                                                   ),
@@ -299,7 +296,7 @@ class _SearchItemState extends State<SearchItem> {
                                                                   decimalDigits:
                                                                       0)
                                                           .format(
-                                                        order["orderTotal"],
+                                                        order["giaTriHangHoa"],
                                                       ),
                                                     ),
                                                     cText(
@@ -311,7 +308,7 @@ class _SearchItemState extends State<SearchItem> {
                                                                   decimalDigits:
                                                                       0)
                                                           .format(
-                                                        order["transportFee"],
+                                                        order["phiVanChuyen"],
                                                       ),
                                                     ),
                                                     cText(
@@ -323,7 +320,7 @@ class _SearchItemState extends State<SearchItem> {
                                                                   decimalDigits:
                                                                       0)
                                                           .format(
-                                                        order["total"],
+                                                        order["tienThuHo"],
                                                       ),
                                                     ),
                                                   ],
@@ -413,9 +410,14 @@ class _SearchItemState extends State<SearchItem> {
                                             Expanded(
                                               flex: 1,
                                               child: Container(
+                                                height: 180,
                                                 decoration: const BoxDecoration(
                                                   border: Border(
                                                     left: BorderSide(
+                                                      color: MColors.darkBlue,
+                                                      width: 1,
+                                                    ),
+                                                    right: BorderSide(
                                                       color: MColors.darkBlue,
                                                       width: 1,
                                                     ),
@@ -484,80 +486,69 @@ class _SearchItemState extends State<SearchItem> {
                                             ),
                                             Expanded(
                                               flex: 1,
-                                              child: Container(
-                                                decoration: const BoxDecoration(
-                                                    border: Border(
-                                                        left: BorderSide(
-                                                  color: MColors.darkBlue,
-                                                  width: 1,
-                                                ))),
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 10),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "LỊCH SỬ VẬN CHUYỂN",
-                                                        style: TextStyle(
-                                                          fontSize: 18,
-                                                          fontStyle:
-                                                              FontStyle.italic,
-                                                          color:
-                                                              MColors.darkBlue,
-                                                        ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Text(
+                                                      "LỊCH SỬ VẬN CHUYỂN",
+                                                      style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontStyle:
+                                                            FontStyle.italic,
+                                                        color: MColors.darkBlue,
                                                       ),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      SizedBox(
-                                                        height: 100,
-                                                        child: ListView.builder(
-                                                          itemCount: log.length,
-                                                          itemBuilder:
-                                                              (context, index) {
-                                                            return Row(
-                                                              children: [
-                                                                const Icon(
-                                                                  Icons.circle,
-                                                                  size: 8,
-                                                                  color: MColors
-                                                                      .darkBlue,
-                                                                ),
-                                                                const SizedBox(
-                                                                  width: 10,
-                                                                ),
-                                                                Flexible(
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 150,
+                                                      child: ListView.builder(
+                                                        itemCount: log.length,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          return Row(
+                                                            children: [
+                                                              const Icon(
+                                                                Icons.circle,
+                                                                size: 8,
+                                                                color: MColors
+                                                                    .darkBlue,
+                                                              ),
+                                                              const SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Flexible(
+                                                                child: SizedBox(
                                                                   child:
-                                                                      SizedBox(
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .all(
-                                                                          5.0),
-                                                                      child:
-                                                                          Text(
-                                                                        reversedLog[
-                                                                            index],
-                                                                        style:
-                                                                            const TextStyle(
-                                                                          fontSize:
-                                                                              17,
-                                                                        ),
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(
+                                                                            5.0),
+                                                                    child: Text(
+                                                                      reversedLog[
+                                                                          index],
+                                                                      style:
+                                                                          const TextStyle(
+                                                                        fontSize:
+                                                                            17,
                                                                       ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ],
-                                                            );
-                                                          },
-                                                        ),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
@@ -571,6 +562,42 @@ class _SearchItemState extends State<SearchItem> {
                             ],
                           ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            child: gotOrderIMG
+                                ? ElevatedButton(
+                                    onPressed: () async =>
+                                        await showAlertDialog(
+                                            order["anhLayHang"]),
+                                    child: const Text(
+                                      "Ảnh lấy hàng",
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                  )
+                                : const SizedBox(),
+                          ),
+                          SizedBox(
+                            width: gotOrderIMG ? 20 : 0,
+                          ),
+                          SizedBox(
+                            child: deliveredOrderIMG
+                                ? ElevatedButton(
+                                    onPressed: () async =>
+                                        await showAlertDialog(
+                                            order["anhGiaoHang"]),
+                                    child: const Text(
+                                      "Ảnh giao hàng",
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                  )
+                                : const SizedBox(),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -631,6 +658,51 @@ class _SearchItemState extends State<SearchItem> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> showAlertDialog(String url) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(20),
+          actionsPadding: const EdgeInsets.only(right: 20, bottom: 20),
+          content: Container(
+            width: 500,
+            height: 500,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: DecorationImage(
+                image: NetworkImage(
+                  url,
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            SizedBox(
+              width: 100,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: MColors.white,
+                  backgroundColor: MColors.darkBlue,
+                  minimumSize: const Size.fromHeight(50),
+                ),
+                child: const Text(
+                  "Đóng",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

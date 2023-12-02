@@ -7,7 +7,7 @@ class MyBarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 500,
+      height: 400,
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: BarChart(
@@ -53,10 +53,10 @@ class MyBarChart extends StatelessWidget {
                 BarChartRodData(toY: 5, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 11, barRods: [
-                BarChartRodData(toY: 2, width: 15, color: Colors.teal),
+                BarChartRodData(toY: 3, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 12, barRods: [
-                BarChartRodData(toY: 0, width: 15, color: Colors.amber),
+                BarChartRodData(toY: 1, width: 15, color: Colors.teal),
               ]),
             ],
           ),

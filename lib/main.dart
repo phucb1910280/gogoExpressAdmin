@@ -13,8 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowTitle('GoGoAmin');
-    setWindowMinSize(const Size(1300, 700));
+    setWindowTitle('GoGoAdmin');
+    setWindowMinSize(const Size(1300, 800));
   }
   runApp(const MyApp());
 }

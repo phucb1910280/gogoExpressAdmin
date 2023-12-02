@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gogo_admin/shared/mcolors.dart';
@@ -13,6 +14,23 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  @override
+  void initState() {
+    getUserSettings();
+    super.initState();
+  }
+
+  getUserSettings() async {
+    var t = await FirebaseFirestore.instance
+        .collection("PostOffice")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .get();
+    setState(() {
+      SettingsScreen.notificationON = t["batThongBao"];
+      SettingsScreen.autoUpdate = t["isAutoUpdate"];
+    });
+  }
+
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
     if (context.mounted) {
@@ -110,112 +128,146 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Tài khoản",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 100,
-                width: 700,
-                decoration: BoxDecoration(
-                  image: const DecorationImage(
-                    image: AssetImage("assets/images/bg.png"),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(9.0),
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                image: NetworkImage(
-                                    "https://firebasestorage.googleapis.com/v0/b/gogoship-70cca.appspot.com/o/shipperProfileImages%2FMy-Face%20Ver6.png?alt=media&token=01fe26b3-be64-47af-ae25-18b69e5f2124"),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Đào Vĩnh Phúc",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+        child: SizedBox(
+          width: 800,
+          child: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection("PostOffice")
+                .doc(FirebaseAuth.instance.currentUser!.email)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      "Thông tin bưu cục",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      // width: 700,
+                      decoration: BoxDecoration(
+                        image: const DecorationImage(
+                          image: AssetImage("assets/images/bg.png"),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(9.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    width: 110,
+                                    height: 110,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                          snapshot.data!["anhDaiDien"]
+                                              .toString(),
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "@ninhkieu",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontStyle: FontStyle.italic,
+                                const SizedBox(
+                                  width: 20,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text(
-                                "0919983995",
-                                style: TextStyle(
-                                  fontSize: 16,
+                                Expanded(
+                                  flex: 5,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${snapshot.data!["tenBuuCuc"]}",
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "Email: ${snapshot.data!["email"]}",
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        "Điện thoại: ${snapshot.data!["soDT"]}",
+                                        style: const TextStyle(
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        "Địa chỉ: ${snapshot.data!["dcBuuCuc"]}",
+                                        style: const TextStyle(
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Cài đặt",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              notificationSwitch(),
-              const SizedBox(
-                height: 10,
-              ),
-              autoUpdateSwitch(),
-              const SizedBox(
-                height: 10,
-              ),
-              logOutButton(),
-            ],
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    const Text(
+                      "Cài đặt",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    notificationSwitch(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    autoUpdateSwitch(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    logOutButton(),
+                  ],
+                );
+              } else {
+                return const Center(
+                  child: Text("error"),
+                );
+              }
+            },
           ),
         ),
       ),
@@ -224,45 +276,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget notificationSwitch() {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          SettingsScreen.notificationON = !SettingsScreen.notificationON;
-        });
-      },
+      onTap: () => setState(() {
+        SettingsScreen.notificationON = !SettingsScreen.notificationON;
+      }),
       child: Container(
         height: 45,
-        width: 700,
+        // width: 700,
         decoration: BoxDecoration(
           color: MColors.background,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                "Thông báo",
-                style: TextStyle(
-                  fontSize: 16,
+          child: SizedBox(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  "Thông báo",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              const Expanded(child: SizedBox()),
-              Switch(
-                onChanged: (value) => {
-                  setState(() {
-                    SettingsScreen.notificationON = value;
-                  })
-                },
-                value: SettingsScreen.notificationON,
-                activeColor: Colors.white,
-                activeTrackColor: Colors.green,
-                inactiveTrackColor: Colors.grey,
-                inactiveThumbColor: Colors.white,
-                trackOutlineColor:
-                    const MaterialStatePropertyAll(Colors.transparent),
-              ),
-            ],
+                const Expanded(child: SizedBox()),
+                Switch(
+                  onChanged: (value) async => {
+                    await FirebaseFirestore.instance
+                        .collection("PostOffice")
+                        .doc(FirebaseAuth.instance.currentUser!.email)
+                        .update({
+                      "batThongBao": value,
+                    }),
+                    setState(() {
+                      SettingsScreen.notificationON = value;
+                    }),
+                  },
+                  value: SettingsScreen.notificationON,
+                  activeColor: Colors.white,
+                  activeTrackColor: Colors.green,
+                  inactiveTrackColor: Colors.grey,
+                  inactiveThumbColor: Colors.white,
+                  trackOutlineColor:
+                      const MaterialStatePropertyAll(Colors.transparent),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -271,14 +329,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget autoUpdateSwitch() {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          SettingsScreen.autoUpdate = !SettingsScreen.autoUpdate;
-        });
-      },
+      onTap: () => setState(() {
+        SettingsScreen.autoUpdate = !SettingsScreen.autoUpdate;
+      }),
       child: Container(
         height: 45,
-        width: 700,
+        // width: 700,
         decoration: BoxDecoration(
           color: MColors.background,
           borderRadius: BorderRadius.circular(10),
@@ -296,10 +352,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const Expanded(child: SizedBox()),
               Switch(
-                onChanged: (value) => {
+                onChanged: (value) async => {
+                  await FirebaseFirestore.instance
+                      .collection("PostOffice")
+                      .doc(FirebaseAuth.instance.currentUser!.email)
+                      .update({
+                    "isAutoUpdate": value,
+                  }),
                   setState(() {
                     SettingsScreen.autoUpdate = value;
-                  })
+                  }),
                 },
                 value: SettingsScreen.autoUpdate,
                 activeColor: Colors.white,
@@ -321,7 +383,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       onTap: () => showAlertDialog(),
       child: Container(
         height: 45,
-        width: 700,
         decoration: BoxDecoration(
           color: MColors.background,
           borderRadius: BorderRadius.circular(10),

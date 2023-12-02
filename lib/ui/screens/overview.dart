@@ -23,39 +23,39 @@ class _OverviewScreenState extends State<OverviewScreen> {
 
   void getChartData() async {
     var deliveringQ = await FirebaseFirestore.instance
-        .collection("Orders")
-        .where("status", isEqualTo: "Đang giao hàng")
+        .collection("DeliverOrders")
+        .where("trangThaiDonHang", isEqualTo: "Đang giao hàng")
         .get();
     var deliveringL =
         deliveringQ.docs.map((order) => order.toString()).toList();
 
     var delayQ = await FirebaseFirestore.instance
-        .collection("Orders")
-        .where("status", isEqualTo: "Delay giao hàng")
+        .collection("DeliverOrders")
+        .where("trangThaiDonHang", isEqualTo: "Delay giao hàng")
         .get();
     var delayL = delayQ.docs.map((order) => order.toString()).toList();
 
     var deliveredQ = await FirebaseFirestore.instance
-        .collection("Orders")
-        .where("status", isEqualTo: "Đã giao hàng")
+        .collection("DeliverOrders")
+        .where("trangThaiDonHang", isEqualTo: "Đã giao hàng")
         .get();
     var deliveredL = deliveredQ.docs.map((order) => order.toString()).toList();
 
     var pickingQ = await FirebaseFirestore.instance
-        .collection("Orders")
-        .where("status", isEqualTo: "Đang lấy hàng")
+        .collection("DeliverOrders")
+        .where("trangThaiDonHang", isEqualTo: "Đang lấy hàng")
         .get();
     var pickingL = pickingQ.docs.map((order) => order.toString()).toList();
 
     var delayPickQ = await FirebaseFirestore.instance
-        .collection("Orders")
-        .where("status", isEqualTo: "Delay lấy hàng")
+        .collection("DeliverOrders")
+        .where("trangThaiDonHang", isEqualTo: "Delay lấy hàng")
         .get();
     var delayPickL = delayPickQ.docs.map((order) => order.toString()).toList();
 
     var successPQ = await FirebaseFirestore.instance
-        .collection("Orders")
-        .where("status", isEqualTo: "Đã lấy hàng")
+        .collection("DeliverOrders")
+        .where("trangThaiDonHang", isEqualTo: "Đã lấy hàng")
         .get();
     var sucessPL = successPQ.docs.map((order) => order.toString()).toList();
 
@@ -136,7 +136,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                               animationDuration:
                                   const Duration(milliseconds: 800),
                               chartLegendSpacing: 32,
-                              chartRadius: 200,
+                              chartRadius: 150,
                               colorList: const [
                                 MColors.darkBlue3,
                                 MColors.lightBlue2,
@@ -189,7 +189,7 @@ class _OverviewScreenState extends State<OverviewScreen> {
                               animationDuration:
                                   const Duration(milliseconds: 800),
                               chartLegendSpacing: 32,
-                              chartRadius: 200,
+                              chartRadius: 150,
                               colorList: const [
                                 MColors.lightBlue3,
                                 MColors.lightPink2,
@@ -243,7 +243,41 @@ class _OverviewScreenState extends State<OverviewScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                const MyBarChart(),
+                const SizedBox(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: RotatedBox(
+                          quarterTurns: -1,
+                          child: Text(
+                            "Số đơn hàng mỗi tháng",
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 55,
+                        child: MyBarChart(),
+                      ),
+                    ],
+                  ),
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Tháng trong năm",
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

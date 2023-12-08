@@ -14,15 +14,19 @@ class ShippersScreen extends StatefulWidget {
 class _ShippersScreenState extends State<ShippersScreen> {
   bool hideFunction = true;
   final _formKey = GlobalKey<FormState>();
+  final _editFormKey = GlobalKey<FormState>();
   int choice = 1;
 
   var fullName = TextEditingController();
+  var editName = TextEditingController();
   var cccd = TextEditingController();
   var phoneNumber = TextEditingController();
+  var editPhoneNumber = TextEditingController();
   var email = TextEditingController();
   var dayOfBirth = TextEditingController();
   var mainAddress = TextEditingController();
   var secondAddress = TextEditingController();
+  var editSecondAddress = TextEditingController();
   var password = TextEditingController();
 
   String id = "";
@@ -83,7 +87,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
       "redeliveryOrders": redeliveryOrders,
       "importOrders": importOrders,
       "successfulDeliveryOrders": successfulDeliveryOrders,
-    });
+    }).then((value) => showSuccessPopUp("Tạo nhân viên thành công"));
   }
 
   void resetTextController() {
@@ -103,7 +107,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +146,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
                 height: hideFunction == true ? 15 : 0,
               ),
               const Text(
-                "DANH SÁCH NHÂN VIÊN",
+                "NHÂN VIÊN VẬN CHUYỂN",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -151,7 +155,6 @@ class _ShippersScreenState extends State<ShippersScreen> {
               const SizedBox(height: 10),
               Center(
                 child: SizedBox(
-                  width: 1000,
                   child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection("Shippers")
@@ -183,9 +186,9 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                         padding: const EdgeInsets.all(10.0),
                                         child: Row(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                              CrossAxisAlignment.start,
+                                          // mainAxisAlignment:
+                                          //     MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               flex: 2,
@@ -354,7 +357,22 @@ class _ShippersScreenState extends State<ShippersScreen> {
                                                 child: Column(
                                                   children: [
                                                     ElevatedButton(
-                                                      onPressed: () {},
+                                                      onPressed: () async {
+                                                        await showEditForm(
+                                                          shipperSnap.data!
+                                                                  .docs[index]
+                                                              ["fullName"],
+                                                          shipperSnap.data!
+                                                                  .docs[index]
+                                                              ["phoneNumber"],
+                                                          shipperSnap.data!
+                                                                  .docs[index]
+                                                              ["secondAddress"],
+                                                          shipperSnap.data!
+                                                                  .docs[index]
+                                                              ["email"],
+                                                        );
+                                                      },
                                                       style: ElevatedButton
                                                           .styleFrom(
                                                         foregroundColor:
@@ -435,7 +453,7 @@ class _ShippersScreenState extends State<ShippersScreen> {
           ),
           borderRadius: BorderRadius.circular(20),
         ),
-        width: 1000,
+        // width: 1000,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Form(
@@ -1074,6 +1092,306 @@ class _ShippersScreenState extends State<ShippersScreen> {
                       "Đồng ý",
                       style: TextStyle(
                         fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> showSuccessPopUp(String content) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Image.asset(
+                    "assets/images/success.png",
+                    color: MColors.green,
+                    height: 150,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Center(
+                    child: Text(
+                      content,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            SizedBox(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: MColors.white,
+                  backgroundColor: MColors.green,
+                  minimumSize: const Size.fromHeight(50),
+                ),
+                child: const Text(
+                  "Đóng",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> showEditForm(
+      String name, String phone, String secondA, String email) async {
+    resetTextController();
+    setState(() {
+      editName.text = name;
+      editPhoneNumber.text = phone;
+      editSecondAddress.text = secondA;
+    });
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          content: Form(
+            key: _editFormKey,
+            child: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Cập nhật thông tin",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: 400,
+                      child: TextFormField(
+                        controller: editName,
+                        maxLength: 100,
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                        decoration: InputDecoration(
+                          hoverColor: Colors.amber[100],
+                          counterText: "",
+                          hintText: "Họ tên",
+                          hintStyle: const TextStyle(
+                            fontSize: 17,
+                          ),
+                          border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: MColors.orange, width: 1.5),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: MColors.white),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: MColors.error),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: MColors.error),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Hãy nhập họ tên";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: 400,
+                      child: TextFormField(
+                        controller: editPhoneNumber,
+                        maxLength: 10,
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                        decoration: InputDecoration(
+                          hoverColor: Colors.amber[100],
+                          counterText: "",
+                          hintText: "Số điện thoại",
+                          hintStyle: const TextStyle(
+                            fontSize: 17,
+                          ),
+                          border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: MColors.orange, width: 1.5),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: MColors.white),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: MColors.error),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: MColors.error),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Hãy nhập số điện thoại";
+                          }
+                          if (!value.startsWith("0") && value.length != 10) {
+                            return "Số điện thoại không hợp lệ";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: 400,
+                      child: TextFormField(
+                        controller: editSecondAddress,
+                        maxLength: 200,
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                        decoration: InputDecoration(
+                          hoverColor: Colors.amber[100],
+                          counterText: "",
+                          hintText: "Thường trú",
+                          hintStyle: const TextStyle(
+                            fontSize: 17,
+                          ),
+                          border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: MColors.orange, width: 1.5),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: MColors.white),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: MColors.error),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(color: MColors.error),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Hãy nhập địa chỉ tạm trú";
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: MColors.orange,
+                        backgroundColor: MColors.white,
+                        minimumSize: const Size.fromHeight(50),
+                      ),
+                      child: const Text(
+                        "Hủy",
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: SizedBox(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_editFormKey.currentState!.validate()) {
+                          await FirebaseFirestore.instance
+                              .collection("Shippers")
+                              .doc(email)
+                              .update({
+                            "fullName": fullName.text,
+                            "phoneNumber": phoneNumber.text,
+                            "secondAddress": secondAddress.text,
+                          }).then((value) => {
+                                    Navigator.pop(context),
+                                    showSuccessPopUp("Cập nhật thành công"),
+                                  });
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: MColors.white,
+                        backgroundColor: MColors.orange,
+                        minimumSize: const Size.fromHeight(50),
+                      ),
+                      child: const Text(
+                        "Cập nhật",
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),

@@ -35,6 +35,7 @@ class Pastel extends Material {
   static const blue = Color(0xffD2E0FB);
   static const purple = Color(0xffDFCCFB);
   static const grey = Color(0xffF9F5F6);
+  static const orange = Color(0xffFAC898);
 
   static const green = Color(0xffB0D9B1);
   static const green50 = Color(0xffC4DFDF);

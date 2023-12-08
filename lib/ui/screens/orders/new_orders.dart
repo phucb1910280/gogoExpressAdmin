@@ -256,6 +256,12 @@ class _NewOrdersState extends State<NewOrders> {
                                                     ),
                                                     const SizedBox(height: 8),
                                                     MText(
+                                                        title: "Tên Sản phẩm:",
+                                                        content:
+                                                            o.data!.docs[index]
+                                                                ["tenSanPham"]),
+                                                    const SizedBox(height: 8),
+                                                    MText(
                                                         title: "Loại hàng hóa:",
                                                         content: o.data!
                                                                 .docs[index]
@@ -303,25 +309,6 @@ class _NewOrdersState extends State<NewOrders> {
                                                       size: 16,
                                                       bold: true,
                                                     ),
-                                                    const SizedBox(height: 8),
-                                                    ElevatedButton(
-                                                      onPressed: () async =>
-                                                          showAlertDialog(o
-                                                                  .data!
-                                                                  .docs[index]
-                                                              ["anhSanPham"]),
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        backgroundColor:
-                                                            Pastel.pink,
-                                                        foregroundColor:
-                                                            MColors.black,
-                                                        minimumSize: const Size
-                                                            .fromHeight(50),
-                                                      ),
-                                                      child: const Text(
-                                                          "Ảnh sản phẩm"),
-                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -344,6 +331,24 @@ class _NewOrdersState extends State<NewOrders> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
+                                      ElevatedButton(
+                                        onPressed: () async => showAlertDialog(
+                                            o.data!.docs[index]["anhSanPham"]),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Pastel.pink,
+                                          foregroundColor: MColors.black,
+                                          minimumSize:
+                                              const Size.fromHeight(50),
+                                        ),
+                                        child: const Text("Ảnh sản phẩm"),
+                                      ),
+                                      const SizedBox(
+                                        height: 40,
+                                        child: Divider(
+                                          color: Colors.black12,
+                                          thickness: 1,
+                                        ),
+                                      ),
                                       const Text(
                                         "Điều phối lấy hàng",
                                         style: TextStyle(
@@ -352,7 +357,7 @@ class _NewOrdersState extends State<NewOrders> {
                                       ),
                                       const SizedBox(height: 15),
                                       SizedBox(
-                                        height: 150,
+                                        height: 120,
                                         child: StreamBuilder(
                                           stream: FirebaseFirestore.instance
                                               .collection("Shippers")

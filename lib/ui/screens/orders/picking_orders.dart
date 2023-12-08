@@ -38,6 +38,51 @@ class _PickingOrdersState extends State<PickingOrders> {
     });
   }
 
+  Future<void> showImage(String url) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(20),
+          actionsPadding: const EdgeInsets.only(right: 20, bottom: 20),
+          content: Container(
+            width: 500,
+            height: 500,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: DecorationImage(
+                image: NetworkImage(
+                  url,
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            SizedBox(
+              width: 100,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: MColors.white,
+                  backgroundColor: MColors.darkBlue,
+                  minimumSize: const Size.fromHeight(50),
+                ),
+                child: const Text(
+                  "Đóng",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget cText(String title, String content) {
     return Row(
       children: [
@@ -73,13 +118,14 @@ class _PickingOrdersState extends State<PickingOrders> {
               children: [
                 Text(
                   "Đơn delay lấy hàng (${delay.length})",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 20,
+                    color: Colors.orange[400],
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(
-                  width: 10,
+                  width: 20,
                 ),
                 SizedBox(
                   child: delay.isNotEmpty
@@ -91,10 +137,8 @@ class _PickingOrdersState extends State<PickingOrders> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: hideDelay == false
-                                  ? Colors.yellow[100]
-                                  : Pastel.blue,
-                              foregroundColor: MColors.black,
+                              backgroundColor: Colors.orange[400],
+                              foregroundColor: Colors.white,
                             ),
                             child: Text(hideDelay == false ? "Ẩn" : "Hiện"),
                           ),
@@ -104,11 +148,12 @@ class _PickingOrdersState extends State<PickingOrders> {
               ],
             ),
             hideDelay == false ? delayOrder(context) : const SizedBox(),
-            const SizedBox(height: 5),
+            const SizedBox(height: 10),
             Text(
               "Đơn hàng đang lấy (${picking.length})",
               style: const TextStyle(
                 fontSize: 20,
+                color: MColors.blue,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -240,6 +285,32 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                             style:
                                                                 const TextStyle(
                                                               fontSize: 17,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 15,
+                                                          ),
+                                                          SizedBox(
+                                                            child:
+                                                                ElevatedButton(
+                                                              onPressed: () =>
+                                                                  showImage(o
+                                                                          .data!
+                                                                          .docs[index]
+                                                                      [
+                                                                      "anhSanPham"]),
+                                                              style: ElevatedButton.styleFrom(
+                                                                  minimumSize:
+                                                                      const Size
+                                                                          .fromHeight(
+                                                                          40)),
+                                                              child: const Text(
+                                                                "Ảnh sản phẩm",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 16,
+                                                                ),
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -623,6 +694,29 @@ class _PickingOrdersState extends State<PickingOrders> {
                                                     "Địa chỉ: ${o.data!.docs[index]["dcNguoiGui"]}",
                                                     style: const TextStyle(
                                                       fontSize: 17,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 15,
+                                                  ),
+                                                  SizedBox(
+                                                    child: ElevatedButton(
+                                                      onPressed: () =>
+                                                          showImage(o.data!
+                                                                  .docs[index]
+                                                              ["anhSanPham"]),
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                              minimumSize:
+                                                                  const Size
+                                                                      .fromHeight(
+                                                                      40)),
+                                                      child: const Text(
+                                                        "Ảnh sản phẩm",
+                                                        style: TextStyle(
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ],

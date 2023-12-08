@@ -140,8 +140,8 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                                         const Text(
                                                           "NGƯỜI GỬI",
                                                           style: TextStyle(
-                                                            color: MColors
-                                                                .darkBlue3,
+                                                            color:
+                                                                MColors.green,
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -213,8 +213,8 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                                           const Text(
                                                             "NGƯỜI NHẬN",
                                                             style: TextStyle(
-                                                              color: MColors
-                                                                  .darkBlue3,
+                                                              color:
+                                                                  MColors.green,
                                                               fontSize: 15,
                                                               fontWeight:
                                                                   FontWeight
@@ -271,8 +271,8 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                                         const Text(
                                                           "LỊCH SỬ VẬN CHUYỂN",
                                                           style: TextStyle(
-                                                            color: MColors
-                                                                .darkBlue3,
+                                                            color:
+                                                                MColors.green,
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -350,12 +350,11 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                     padding: const EdgeInsets.only(
                                         right: 10, bottom: 10),
                                     child: ElevatedButton(
-                                      onPressed: () async =>
-                                          await showAlertDialog(o
-                                              .data!.docs[index]["anhLayHang"]
-                                              .toString()),
+                                      onPressed: () async => await showImage(o
+                                          .data!.docs[index]["anhLayHang"]
+                                          .toString()),
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.green[100],
+                                        backgroundColor: Pastel.green,
                                         foregroundColor: MColors.black,
                                         minimumSize: const Size.fromHeight(50),
                                       ),
@@ -366,31 +365,30 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
                                     padding: const EdgeInsets.only(
                                         right: 10, bottom: 10),
                                     child: ElevatedButton(
-                                      onPressed: () async =>
-                                          await showAlertDialog(o
-                                              .data!.docs[index]["anhGiaoHang"]
-                                              .toString()),
+                                      onPressed: () async => await showImage(o
+                                          .data!.docs[index]["anhGiaoHang"]
+                                          .toString()),
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.green[100],
+                                        backgroundColor: Pastel.green,
                                         foregroundColor: MColors.black,
                                         minimumSize: const Size.fromHeight(50),
                                       ),
                                       child: const Text("Ảnh giao hàng"),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 10, bottom: 10),
-                                    child: ElevatedButton(
-                                      onPressed: () async {},
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.green[100],
-                                        foregroundColor: MColors.black,
-                                        minimumSize: const Size.fromHeight(50),
-                                      ),
-                                      child: const Text("In đơn hàng"),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(
+                                  //       right: 10, bottom: 10),
+                                  //   child: ElevatedButton(
+                                  //     onPressed: () async {},
+                                  //     style: ElevatedButton.styleFrom(
+                                  //       backgroundColor: Pastel.green,
+                                  //       foregroundColor: MColors.black,
+                                  //       minimumSize: const Size.fromHeight(50),
+                                  //     ),
+                                  //     child: const Text("In đơn hàng"),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -412,7 +410,7 @@ class _PickingOrdersState extends State<SucessfulDelivery> {
     );
   }
 
-  Future<void> showAlertDialog(String url) async {
+  Future<void> showImage(String url) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: true,

@@ -177,7 +177,7 @@ class _SearchItemState extends State<SearchItem> {
                                                       height: 10,
                                                     ),
                                                     Text(
-                                                      "${order["nguoiGui"]}",
+                                                      "Họ tên: ${order["nguoiGui"]}",
                                                       style: const TextStyle(
                                                         fontSize: 20,
                                                         fontWeight:
@@ -185,12 +185,15 @@ class _SearchItemState extends State<SearchItem> {
                                                       ),
                                                     ),
                                                     const SizedBox(
-                                                      height: 10,
+                                                      height: 5,
                                                     ),
                                                     MText(
                                                       title: "Điện thoại",
                                                       content:
                                                           "${order["sdtNguoiGui"]}",
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 5,
                                                     ),
                                                     MText(
                                                       title: "Địa chỉ:",
@@ -204,7 +207,7 @@ class _SearchItemState extends State<SearchItem> {
                                             Expanded(
                                               flex: 1,
                                               child: Container(
-                                                height: 150,
+                                                height: 180,
                                                 decoration: const BoxDecoration(
                                                   border: Border(
                                                     right: BorderSide(
@@ -240,7 +243,7 @@ class _SearchItemState extends State<SearchItem> {
                                                         height: 10,
                                                       ),
                                                       Text(
-                                                        "${order["nguoiNhan"]}",
+                                                        "Họ tên: ${order["nguoiNhan"]}",
                                                         style: const TextStyle(
                                                           fontSize: 20,
                                                           fontWeight:
@@ -248,12 +251,15 @@ class _SearchItemState extends State<SearchItem> {
                                                         ),
                                                       ),
                                                       const SizedBox(
-                                                        height: 10,
+                                                        height: 5,
                                                       ),
                                                       MText(
                                                         title: "Điện thoại",
                                                         content:
                                                             "${order["sdtNguoiNhan"]}",
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 5,
                                                       ),
                                                       MText(
                                                         title: "Địa chỉ:",
@@ -287,8 +293,28 @@ class _SearchItemState extends State<SearchItem> {
                                                     const SizedBox(
                                                       height: 10,
                                                     ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 3),
+                                                      child: MText(
+                                                        title: "Tên hàng hóa:",
+                                                        content:
+                                                            order["tenSanPham"],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          vertical: 3),
+                                                      child: MText(
+                                                        title: "Loại hàng hóa:",
+                                                        content: order[
+                                                            "loaiHangHoa"],
+                                                      ),
+                                                    ),
                                                     cText(
-                                                      "Tiền hàng",
+                                                      "Giá trị hàng hóa:",
                                                       NumberFormat
                                                               .simpleCurrency(
                                                                   locale:
@@ -300,7 +326,7 @@ class _SearchItemState extends State<SearchItem> {
                                                       ),
                                                     ),
                                                     cText(
-                                                      "Phí ship:",
+                                                      "Phí vận chuyển:",
                                                       NumberFormat
                                                               .simpleCurrency(
                                                                   locale:
@@ -312,7 +338,7 @@ class _SearchItemState extends State<SearchItem> {
                                                       ),
                                                     ),
                                                     cText(
-                                                      "Tổng cộng:",
+                                                      "Tiền COD:",
                                                       NumberFormat
                                                               .simpleCurrency(
                                                                   locale:
@@ -383,16 +409,30 @@ class _SearchItemState extends State<SearchItem> {
                                                             const SizedBox(
                                                               height: 10,
                                                             ),
-                                                            MText(
-                                                              title:
-                                                                  "Điện thoại:",
-                                                              content:
-                                                                  "${picker["phoneNumber"]}",
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      vertical:
+                                                                          2),
+                                                              child: MText(
+                                                                title:
+                                                                    "Điện thoại:",
+                                                                content:
+                                                                    "${picker["phoneNumber"]}",
+                                                              ),
                                                             ),
-                                                            MText(
-                                                              title: "Email:",
-                                                              content:
-                                                                  "${picker["email"]}",
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      vertical:
+                                                                          2),
+                                                              child: MText(
+                                                                title: "Email:",
+                                                                content:
+                                                                    "${picker["email"]}",
+                                                              ),
                                                             ),
                                                           ],
                                                         )
@@ -460,16 +500,30 @@ class _SearchItemState extends State<SearchItem> {
                                                             const SizedBox(
                                                               height: 10,
                                                             ),
-                                                            MText(
-                                                              title:
-                                                                  "Điện thoại:",
-                                                              content:
-                                                                  "${shipper["phoneNumber"]}",
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      vertical:
+                                                                          2),
+                                                              child: MText(
+                                                                title:
+                                                                    "Điện thoại:",
+                                                                content:
+                                                                    "${shipper["phoneNumber"]}",
+                                                              ),
                                                             ),
-                                                            MText(
-                                                              title: "Email:",
-                                                              content:
-                                                                  "${shipper["email"]}",
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      vertical:
+                                                                          2),
+                                                              child: MText(
+                                                                title: "Email:",
+                                                                content:
+                                                                    "${shipper["email"]}",
+                                                              ),
                                                             ),
                                                           ],
                                                         )
@@ -569,27 +623,57 @@ class _SearchItemState extends State<SearchItem> {
                       Row(
                         children: [
                           SizedBox(
+                            width: 200,
+                            child: ElevatedButton(
+                              onPressed: () async =>
+                                  await showAlertDialog(order["anhSanPham"]),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Pastel.blue,
+                                minimumSize: const Size.fromHeight(50),
+                              ),
+                              child: const Text(
+                                "Ảnh sản phẩm",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
                             child: gotOrderIMG
-                                ? ElevatedButton(
-                                    onPressed: () async =>
-                                        await showAlertDialog(
-                                            order["anhLayHang"]),
-                                    child: const Text(
-                                      "Ảnh lấy hàng",
-                                      style: TextStyle(fontSize: 18),
+                                ? SizedBox(
+                                    width: 200,
+                                    child: ElevatedButton(
+                                      onPressed: () async =>
+                                          await showAlertDialog(
+                                              order["anhLayHang"]),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Pastel.blue,
+                                        minimumSize: const Size.fromHeight(50),
+                                      ),
+                                      child: const Text(
+                                        "Ảnh lấy hàng",
+                                        style: TextStyle(fontSize: 18),
+                                      ),
                                     ),
                                   )
                                 : const SizedBox(),
                           ),
                           SizedBox(
-                            width: gotOrderIMG ? 20 : 0,
+                            width: gotOrderIMG ? 10 : 0,
                           ),
                           SizedBox(
+                            width: 200,
                             child: deliveredOrderIMG
                                 ? ElevatedButton(
                                     onPressed: () async =>
                                         await showAlertDialog(
                                             order["anhGiaoHang"]),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Pastel.blue,
+                                      minimumSize: const Size.fromHeight(50),
+                                    ),
                                     child: const Text(
                                       "Ảnh giao hàng",
                                       style: TextStyle(fontSize: 18),
@@ -633,7 +717,7 @@ class _SearchItemState extends State<SearchItem> {
 
   Widget cText(String title, String content) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.symmetric(vertical: 3),
       child: SizedBox(
         child: Row(
           children: [

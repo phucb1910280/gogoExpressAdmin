@@ -72,18 +72,20 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
             Row(
               children: [
                 Text(
-                  "Đơn delay lấy hàng (${delay.length})",
-                  style: const TextStyle(
+                  "Đơn delay giao hàng (${delay.length})",
+                  style: TextStyle(
                     fontSize: 20,
+                    color: Colors.orange[400],
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(
-                  width: 10,
+                  width: 20,
                 ),
                 SizedBox(
                   child: delay.isNotEmpty
                       ? SizedBox(
+                          width: 120,
                           child: ElevatedButton(
                             onPressed: () {
                               setState(() {
@@ -91,10 +93,8 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: hideDelay == false
-                                  ? Colors.yellow[100]
-                                  : Pastel.blue,
-                              foregroundColor: MColors.black,
+                              backgroundColor: Colors.orange[400],
+                              foregroundColor: Colors.white,
                             ),
                             child: Text(hideDelay == false ? "Ẩn" : "Hiện"),
                           ),
@@ -104,11 +104,12 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
               ],
             ),
             hideDelay == false ? delayOrder(context) : const SizedBox(),
-            const SizedBox(height: 5),
+            const SizedBox(height: 10),
             Text(
               "Đơn hàng đang giao (${delivering.length})",
               style: const TextStyle(
                 fontSize: 20,
+                color: MColors.blue,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -506,7 +507,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             width: 1,
-                            color: MColors.yellow,
+                            color: Colors.orange,
                           ),
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -521,7 +522,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                          color: Colors.yellow[100],
+                                          color: Colors.yellow[200],
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
@@ -554,7 +555,7 @@ class _DeliveringOrdersState extends State<DeliveringOrders> {
                                         decoration: BoxDecoration(
                                           // color: Colors.yellow[100],
                                           border: Border.all(
-                                            color: MColors.orange,
+                                            color: MColors.lightOrange,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(10),

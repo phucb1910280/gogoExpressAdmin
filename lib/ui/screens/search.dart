@@ -12,13 +12,13 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  var orderController = TextEditingController();
+  var searchController = TextEditingController();
   String orderID = "";
   bool isWaiting = true;
 
   @override
   void dispose() {
-    orderController.dispose();
+    searchController.dispose();
     super.dispose();
   }
 
@@ -37,10 +37,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   SizedBox(
                     width: 300,
                     child: TextField(
-                      controller: orderController,
+                      controller: searchController,
                       maxLength: 12,
                       style: const TextStyle(
                         fontSize: 18,
+                        color: MColors.darkBlue,
                       ),
                       decoration: InputDecoration(
                         hintText: "Nhập mã đơn hàng",
@@ -49,21 +50,21 @@ class _SearchScreenState extends State<SearchScreen> {
                             onTap: () {
                               setState(() {
                                 isWaiting = true;
-                                orderController.text = "";
+                                searchController.text = "";
                               });
                             },
                             child: const Icon(Icons.clear)),
                         suffixIconColor: Colors.black45,
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
-                            color: Pastel.purple,
+                            color: Pastel.blue,
                             width: 1,
                           ),
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
-                            color: Pastel.blue,
+                            color: MColors.darkBlue,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(30),
@@ -80,13 +81,12 @@ class _SearchScreenState extends State<SearchScreen> {
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size.fromHeight(56),
                         backgroundColor: Pastel.blue,
-                        foregroundColor: MColors.black,
                       ),
                       onPressed: () {
-                        if (orderController.text.isNotEmpty) {
+                        if (searchController.text.isNotEmpty) {
                           setState(() {
                             isWaiting = true;
-                            orderID = orderController.text;
+                            orderID = searchController.text;
                             Timer(const Duration(milliseconds: 300), () {
                               setState(() {
                                 isWaiting = false;
@@ -95,10 +95,13 @@ class _SearchScreenState extends State<SearchScreen> {
                           });
                         }
                       },
-                      icon: const Icon(Icons.search),
+                      icon: const Icon(
+                        Icons.search,
+                        color: MColors.darkBlue,
+                      ),
                       label: const Text(
                         "Tìm đơn hàng",
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 18, color: MColors.darkBlue),
                       ),
                     ),
                   ),

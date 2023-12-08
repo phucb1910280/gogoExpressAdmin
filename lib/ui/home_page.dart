@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gogo_admin/shared/mcolors.dart';
+import 'package:gogo_admin/ui/screens/money.dart';
 import 'package:gogo_admin/ui/screens/orders_overview.dart';
 import 'package:gogo_admin/ui/screens/overview.dart';
 import 'package:gogo_admin/ui/screens/search.dart';
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     const OverviewScreen(),
     const SearchScreen(),
     const OrdersOverview(),
+    const OrderMoney(),
     const ShippersScreen(),
     const SettingsScreen(),
   ];
@@ -33,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             NavigationRail(
               backgroundColor: Pastel.green30,
-              useIndicator: true,
+              // useIndicator: true,
               extended: true,
               onDestinationSelected: (value) {
                 setState(() {
@@ -125,6 +127,11 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(Icons.inventory_2_outlined),
                   selectedIcon: Icon(Icons.inventory),
                   label: Text('Đơn hàng'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.attach_money_rounded),
+                  selectedIcon: Icon(Icons.attach_money_rounded),
+                  label: Text('Tiền hàng'),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.groups_2_outlined),

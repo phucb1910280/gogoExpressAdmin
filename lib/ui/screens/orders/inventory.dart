@@ -134,60 +134,103 @@ class _InventoryState extends State<Inventory> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Expanded(
-                                                  flex: 1,
-                                                  child: SizedBox(
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        const Text(
-                                                          "NGƯỜI GỬI",
-                                                          style: TextStyle(
-                                                            color: MColors
-                                                                .darkBlue3,
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontStyle: FontStyle
-                                                                .italic,
+                                                  flex: 2,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        "NGƯỜI GỬI",
+                                                        style: TextStyle(
+                                                          color:
+                                                              MColors.darkBlue3,
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontStyle:
+                                                              FontStyle.italic,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 8,
+                                                      ),
+                                                      SelectableText(
+                                                        "${orderSnap.data!.docs[index]["nguoiGui"]}",
+                                                        style: const TextStyle(
+                                                          fontSize: 20,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 8),
+                                                      SelectableText(
+                                                        "Điện thoại: ${orderSnap.data!.docs[index]["sdtNguoiGui"]}",
+                                                        style: const TextStyle(
+                                                          fontSize: 17,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(height: 8),
+                                                      SelectableText(
+                                                        "Địa chỉ: ${orderSnap.data!.docs[index]["dcNguoiGui"]}",
+                                                        style: const TextStyle(
+                                                          fontSize: 17,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 15,
+                                                      ),
+                                                      SizedBox(
+                                                        child: ElevatedButton(
+                                                          onPressed: () =>
+                                                              showImage(orderSnap
+                                                                          .data!
+                                                                          .docs[
+                                                                      index][
+                                                                  "anhLayHang"]),
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                                  minimumSize:
+                                                                      const Size
+                                                                          .fromHeight(
+                                                                          40)),
+                                                          child: const Text(
+                                                            "Ảnh lấy hàng",
+                                                            style: TextStyle(
+                                                              fontSize: 16,
+                                                            ),
                                                           ),
                                                         ),
-                                                        const SizedBox(
-                                                          height: 8,
-                                                        ),
-                                                        SelectableText(
-                                                          "${orderSnap.data!.docs[index]["nguoiGui"]}",
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 20,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      SizedBox(
+                                                        child: ElevatedButton(
+                                                          onPressed: () =>
+                                                              showImage(orderSnap
+                                                                          .data!
+                                                                          .docs[
+                                                                      index][
+                                                                  "anhSanPham"]),
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                                  minimumSize:
+                                                                      const Size
+                                                                          .fromHeight(
+                                                                          40)),
+                                                          child: const Text(
+                                                            "Ảnh sản phẩm",
+                                                            style: TextStyle(
+                                                              fontSize: 16,
+                                                            ),
                                                           ),
                                                         ),
-                                                        const SizedBox(
-                                                            height: 8),
-                                                        SelectableText(
-                                                          "Điện thoại: ${orderSnap.data!.docs[index]["sdtNguoiGui"]}",
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 17,
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 8),
-                                                        SelectableText(
-                                                          "Địa chỉ: ${orderSnap.data!.docs[index]["dcNguoiGui"]}",
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 17,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                                 const SizedBox(width: 20),
                                                 Expanded(
-                                                  flex: 2,
+                                                  flex: 3,
                                                   child: SizedBox(
                                                     child: StreamBuilder(
                                                       stream: FirebaseFirestore
@@ -208,12 +251,12 @@ class _InventoryState extends State<Inventory> {
                                                             decoration:
                                                                 const BoxDecoration(
                                                               border: Border(
-                                                                right:
-                                                                    BorderSide(
-                                                                  color: MColors
-                                                                      .darkBlue3,
-                                                                  width: 1,
-                                                                ),
+                                                                // right:
+                                                                //     BorderSide(
+                                                                //   color: MColors
+                                                                //       .darkBlue3,
+                                                                //   width: 1,
+                                                                // ),
                                                                 left:
                                                                     BorderSide(
                                                                   color: MColors
@@ -364,47 +407,47 @@ class _InventoryState extends State<Inventory> {
                                                   ),
                                                 ),
                                                 const SizedBox(width: 20),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        "ẢNH LẤY HÀNG",
-                                                        style: TextStyle(
-                                                          fontSize: 15,
-                                                          color:
-                                                              MColors.darkBlue3,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontStyle:
-                                                              FontStyle.italic,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(height: 8),
-                                                      Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          image:
-                                                              DecorationImage(
-                                                            image: NetworkImage(
-                                                              orderS[
-                                                                  "anhLayHang"],
-                                                            ),
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                        height: 150,
-                                                        width: 150,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
+                                                // Expanded(
+                                                //   flex: 1,
+                                                //   child: Column(
+                                                //     crossAxisAlignment:
+                                                //         CrossAxisAlignment
+                                                //             .start,
+                                                //     children: [
+                                                //       const Text(
+                                                //         "ẢNH LẤY HÀNG",
+                                                //         style: TextStyle(
+                                                //           fontSize: 15,
+                                                //           color:
+                                                //               MColors.darkBlue3,
+                                                //           fontWeight:
+                                                //               FontWeight.bold,
+                                                //           fontStyle:
+                                                //               FontStyle.italic,
+                                                //         ),
+                                                //       ),
+                                                //       const SizedBox(height: 8),
+                                                //       Container(
+                                                //         decoration:
+                                                //             BoxDecoration(
+                                                //           borderRadius:
+                                                //               BorderRadius
+                                                //                   .circular(10),
+                                                //           image:
+                                                //               DecorationImage(
+                                                //             image: NetworkImage(
+                                                //               orderS[
+                                                //                   "anhLayHang"],
+                                                //             ),
+                                                //             fit: BoxFit.cover,
+                                                //           ),
+                                                //         ),
+                                                //         height: 150,
+                                                //         width: 150,
+                                                //       ),
+                                                //     ],
+                                                //   ),
+                                                // ),
                                               ],
                                             ),
                                           ),
@@ -425,29 +468,29 @@ class _InventoryState extends State<Inventory> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    ElevatedButton(
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: MColors.darkBlue3,
-                                        foregroundColor: MColors.white,
-                                        minimumSize: const Size.fromHeight(
-                                          50,
-                                        ),
-                                      ),
-                                      child: const Text(
-                                        "In đơn hàng",
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 25,
-                                      child: Divider(
-                                        color: MColors.darkBlue,
-                                        thickness: 0.5,
-                                      ),
-                                    ),
+                                    // ElevatedButton(
+                                    //   onPressed: () {},
+                                    //   style: ElevatedButton.styleFrom(
+                                    //     backgroundColor: MColors.darkBlue3,
+                                    //     foregroundColor: MColors.white,
+                                    //     minimumSize: const Size.fromHeight(
+                                    //       50,
+                                    //     ),
+                                    //   ),
+                                    //   child: const Text(
+                                    //     "In đơn hàng",
+                                    //     style: TextStyle(
+                                    //       fontSize: 17,
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                    // const SizedBox(
+                                    //   height: 25,
+                                    //   child: Divider(
+                                    //     color: MColors.darkBlue,
+                                    //     thickness: 0.5,
+                                    //   ),
+                                    // ),
                                     const Text(
                                       "Điều phối giao hàng",
                                       style: TextStyle(
@@ -570,6 +613,51 @@ class _InventoryState extends State<Inventory> {
           },
         ),
       ),
+    );
+  }
+
+  Future<void> showImage(String url) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(20),
+          actionsPadding: const EdgeInsets.only(right: 20, bottom: 20),
+          content: Container(
+            width: 500,
+            height: 500,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: DecorationImage(
+                image: NetworkImage(
+                  url,
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            SizedBox(
+              width: 100,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: MColors.white,
+                  backgroundColor: MColors.darkBlue,
+                  minimumSize: const Size.fromHeight(50),
+                ),
+                child: const Text(
+                  "Đóng",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

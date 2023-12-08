@@ -1,8 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class MyBarChart extends StatelessWidget {
+class MyBarChart extends StatefulWidget {
   const MyBarChart({super.key});
+
+  @override
+  State<MyBarChart> createState() => _MyBarChartState();
+}
+
+class _MyBarChartState extends State<MyBarChart> {
+  List<String> list = [];
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  getData() async {
+    var t = await FirebaseFirestore.instance
+        .collection("PostOffice")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .get();
+    setState(() {
+      list = List.from(t["donHang"]);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +81,10 @@ class MyBarChart extends StatelessWidget {
                 BarChartRodData(toY: 3, width: 15, color: Colors.amber),
               ]),
               BarChartGroupData(x: 12, barRods: [
-                BarChartRodData(toY: 1, width: 15, color: Colors.teal),
+                BarChartRodData(
+                    toY: double.parse(list.length.toString()),
+                    width: 15,
+                    color: Colors.teal),
               ]),
             ],
           ),
